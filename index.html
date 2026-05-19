@@ -1,0 +1,105 @@
+# index.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">SmartHome</div>
+
+    <nav>
+      <a href="#home">Trang chủ</a>
+      <a href="#products">Sản phẩm</a>
+      <a href="#about">Giới thiệu</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Thiết bị gia dụng thông minh</h1>
+      <p>
+        Mang công nghệ hiện đại đến không gian sống của bạn.
+      </p>
+      <button>Xem sản phẩm</button>
+    </div>
+
+    <div class="hero-image">
+      <img src="images/hero.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <h2>Sản phẩm nổi bật</h2>
+
+    <div class="product-grid">
+
+      <div class="card">
+        <img src="images/product1.jpg" alt="">
+        <h3>Robot hút bụi</h3>
+        <p>Tự động làm sạch thông minh.</p>
+        <button>Xem thêm</button>
+      </div>
+
+      <div class="card">
+        <img src="images/product2.jpg" alt="">
+        <h3>Nồi chiên không dầu</h3>
+        <p>Giảm dầu mỡ, tốt cho sức khỏe.</p>
+        <button>Xem thêm</button>
+      </div>
+
+      <div class="card">
+        <img src="images/product3.jpg" alt="">
+        <h3>Máy lọc không khí</h3>
+        <p>Không khí sạch cho gia đình.</p>
+        <button>Xem thêm</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-image">
+      <img src="images/about.jpg" alt="">
+    </div>
+
+    <div class="about-text">
+      <h2>Về SmartHome</h2>
+      <p>
+        SmartHome là website giới thiệu các thiết bị gia dụng hiện đại,
+        giúp cuộc sống trở nên tiện nghi và thông minh hơn.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Liên hệ</h2>
+
+    <form id="contactForm">
+      <input type="text" placeholder="Họ và tên" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Nội dung"></textarea>
+      <button type="submit">Gửi</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 SmartHome. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
