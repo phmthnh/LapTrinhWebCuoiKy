@@ -5,47 +5,325 @@
   font-family: Arial, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   background: #f5f5f5;
   color: #222;
 }
 
 /* HEADER */
-header{
+/* ==================== HEADER MỚI (ĐEN & TRẮNG) ==================== */
+/* Thiết lập chung cho thanh Header */
+header {
   width: 100%;
   height: 80px;
-  background: white;
+  background: #ffffff;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Thay đổi thành flex-start để chủ động căn chỉnh khoảng cách */
   align-items: center;
-  padding: 0 80px;
+  padding: 0 50px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.logo{
-  font-size: 28px;
-  font-weight: bold;
+/* Khối Logo bên trái */
+.logo {
+  flex-shrink: 0;
+  margin-right: 40px; /* Tạo khoảng cách 40px giữa Logo và ô Tìm kiếm */
 }
 
-nav{
+.logo a {
   display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px; /* Giữ kích thước to như bạn vừa chỉnh */
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Định dạng thanh tìm kiếm Đen - Trắng tinh tế ở giữa */
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 30%; /* Chiếm 30% độ rộng vừa vặn */
+  max-width: 400px;
+  position: relative;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 45px 10px 18px;
+  border: 1px solid #dddddd;
+  border-radius: 20px; /* Bo tròn thanh lịch */
+  font-size: 14px;
+  outline: none;
+  background: #f9f9f9;
+  transition: all 0.2s ease;
+}
+
+.search-container input:focus {
+  border-color: #000000; /* Khi nhấn vào đổi viền thành đen */
+  background: #ffffff;
+}
+
+/* Nút kính lúp màu đen bo tròn */
+.search-btn {
+  position: absolute;
+  right: 4px;
+  background: #000000; /* Nền đen đồng bộ */
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.search-btn:hover {
+  background: #444444; /* Hover chuyển xám đậm */
+}
+
+/* Khối điều hướng và chức năng dồn sang bên phải */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin-left: auto; /* Đẩy toàn bộ khối này dính về sát lề bên phải */
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Khối Menu ở giữa */
+nav {
+  display: flex;
+  align-items: center;
   gap: 30px;
 }
 
-nav a{
+.nav-item {
   text-decoration: none;
-  color: #222;
-  transition: 0.3s;
+  color: #111111;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 0;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-nav a:hover{
-  color: #0077ff;
+.nav-item:hover {
+  color: #555555; /* Di chuột vào chữ đổi sang màu xám đậm thanh lịch */
 }
 
+/* CẤU TRÚC DROPDOWN MENU (GIỐNG ẢNH MẪU CỦA BẠN) */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+/* Khối menu ẩn mặc định */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* Căn giữa menu thả xuống theo chữ Sản phẩm */
+  background-color: #ffffff;
+  min-width: 240px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12); /* Đổ bóng mịn màng */
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1100;
+  border: 1px solid #eeeeee;
+}
+
+/* Các đường link con bên trong menu thả xuống */
+.dropdown-content a {
+  color: #222222;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Khoảng cách giữa icon và chữ */
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+/* Icon trong menu con */
+.dropdown-content a i {
+  color: #666666;
+  width: 18px;
+  text-align: center;
+}
+
+/* Hiệu ứng khi di chuột vào từng ô con: Đổi màu nền xám nhẹ, chữ đen đậm và nhích sang phải nhẹ */
+.dropdown-content a:hover {
+  background-color: #f5f5f5;
+  color: #000000;
+  padding-left: 24px;
+}
+
+/* KHI DI CHUỘT VÀO "SẢN PHẨM" -> HIỆN MENU VÀ XOAY MŨI TÊN */
+.dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeIn 0.2s ease; /* Hiệu ứng hiện ra mượt mà */
+}
+
+.dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg); /* Mũi tên tự động xoay ngược lên khi mở menu */
+}
+
+/* Khối các tính năng bên phải */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-shrink: 0;
+}
+
+/* NÚT ĐĂNG NHẬP ĐEN TRẮNG */
+.login-btn {
+  text-decoration: none;
+  color: #ffffff;
+  background: #000000; /* Nền đen */
+  padding: 10px 22px;
+  border-radius: 20px; /* Bo tròn góc */
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid #000000;
+}
+
+.login-btn:hover {
+  background: #ffffff;
+  color: #000000; /* Di chuột vào đổi thành nền trắng chữ đen cực chất */
+}
+
+/* Icon giỏ hàng */
+/* Khối bao quanh giỏ hàng để định vị */
+.cart-box {
+  position: relative;
+  padding: 10px 0; /* Tạo vùng đệm để khi di chuột từ icon xuống hộp dropdown không bị mất hover */
+}
+
+.cart-icon-wrapper {
+  font-size: 22px;
+  color: #111111;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.cart-box:hover .cart-icon-wrapper {
+  color: #555555; /* Đổi màu nhẹ khi hover */
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: -9px;
+  background: #000000; /* Chấm số lượng màu đen đồng bộ */
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* HỘP THOẠI GIỎ HÀNG THẢ XUỐNG (MINI CART DROPDOWN) */
+.cart-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -20px; /* Căn lề dịch sang phải một chút để cân bằng */
+  background-color: #ffffff;
+  min-width: 260px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12); /* Đổ bóng mịn */
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
+  padding: 25px 20px;
+  z-index: 1100;
+  cursor: default;
+}
+
+/* Trạng thái giỏ hàng trống bên trong */
+.cart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+/* Icon giỏ hàng trống màu xám nhạt */
+.cart-empty-state .empty-icon {
+  font-size: 38px;
+  color: #cccccc;
+}
+
+/* Dòng chữ thông báo */
+.cart-empty-state p {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* KHI DI CHUỘT VÀO ZONE GIỎ HÀNG -> HIỆN DROPDOWN */
+.cart-box:hover .cart-dropdown {
+  display: block;
+  animation: cartFadeIn 0.2s ease;
+}
+
+/* Hiệu ứng trượt nhẹ từ dưới lên khi xuất hiện */
+@keyframes cartFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hiệu ứng mượt mà xuất hiện menu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
 /* HERO */
 .hero{
   min-height: 100vh;
@@ -261,4 +539,192 @@ footer{
   .product-grid{
     grid-template-columns: 1fr;
   }
+
+/* ==================== GIAO DIỆN ĐĂNG NHẬP KIỂU SHOPEE (ĐEN - TRẮNG) ==================== */
+
+/* Reset body riêng cho trang đăng nhập */
+.login-page-body {
+  background-color: #fafafa; /* Nền xám cực nhẹ bên ngoài */
+  margin: 0;
+  padding: 0;
+  display: block; /* Trả về block thay vì flex để header nằm trên cùng */
+}
+
+/* 1. THANH HEADER PHỤ (TRẮNG TINH) */
+.login-page-header {
+  width: 100%;
+  height: 84px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05); /* Đường đổ bóng mỏng tinh tế */
+  display: flex;
+  align-items: center;
+  position: static; /* Không cần fixed */
+  padding: 0;
+}
+
+.login-header-container {
+  width: 100%;
+  max-width: 1200px; /* Giới hạn độ rộng nội dung */
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Chữ "Đăng nhập" nhỏ cạnh Logo */
+.header-page-title {
+  font-size: 20px;
+  color: #222222;
+  font-weight: 500;
+  border-left: 1px solid #e0e0e0; /* Dấu gạch dọc phân cách */
+  padding-left: 15px;
+  margin-top: 4px;
+}
+
+/* 2. VÙNG THÂN TRANG (NỀN TỐI) */
+.login-main-content {
+  width: 100%;
+  min-height: 600px;
+  /* Đây là màu nền ĐEN/XÁM ĐẬM cho toàn bộ vùng thân */
+  background: #111111; 
+  display: flex;
+  align-items: center;
+}
+
+/* Khung bọc để giới hạn độ rộng form */
+.login-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end; /* Đẩy form dính sang bên phải giống Shopee */
+}
+
+/* 3. KHUNG FORM ĐĂNG NHẬP (TRẮNG NỔI BẬT) */
+.shopee-login-card {
+  background: #ffffff; /* Nền form trắng tinh */
+  width: 400px;
+  padding: 30px;
+  border-radius: 4px; /* Bo tròn góc nhẹ chuyên nghiệp */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Đổ bóng nổi khối */
+}
+
+.shopee-login-card .form-title {
+  font-size: 20px;
+  color: #222222;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+/* Các ô input nhập liệu */
+.shopee-input-group {
+  margin-bottom: 12px;
+}
+
+.shopee-input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px; /* Góc vuông nhẹ */
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Khi nhấn vào ô nhập, viền hóa đen */
+.shopee-input-group input:focus {
+  border-color: #000000;
+}
+
+/* Nút Đăng nhập to, đen nguyên khối */
+.shopee-btn-submit {
+  width: 100%;
+  padding: 13px;
+  background: #000000; /* Màu đen chủ đạo */
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.2s;
+}
+
+.shopee-btn-submit:hover {
+  opacity: 0.85; /* Hiệu ứng hover mờ nhẹ sang trọng */
+}
+
+/* Các đường link phụ bên dưới nút bấm */
+.shopee-form-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.shopee-form-links .link-item {
+  font-size: 12px;
+  color: #0055aa;
+  text-decoration: none;
+}
+
+.shopee-form-links .link-item.highlight {
+  color: #000000; /* Nổi bật chữ Đăng ký thành màu đen */
+  font-weight: 600;
+}
+
+.shopee-form-links .link-item:hover {
+  text-decoration: underline;
+}
+
+/* Đường gạch ngang chữ HOẶC */
+.shopee-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0 15px 0;
+}
+
+.shopee-divider .line {
+  flex: 1;
+  height: 1px;
+  background: #dbdbdb;
+}
+
+.shopee-divider span {
+  font-size: 12px;
+  color: #ccc;
+  padding: 0 15px;
+}
+
+/* Nút MXH Đăng nhập nhanh */
+.shopee-social-login {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-social {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.btn-social:hover {
+  background: #f8f8f8;
+}
+
+.btn-social.fb i { color: #1877f2; }
+.btn-social.gg i { color: #ea4335; }
 }
