@@ -4,29 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
+
   <title>SmartHome</title>
 
   <link rel="stylesheet" href="/style.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 
 <body>
-
-  <!-- HEADER -->
+  // HEADER // 
   <header>
-    <div class="logo">SmartHome</div>
+    <div class="logo">
+      <a href="#home">
+        <span>SmartHome</span>
+      </a>
+    </div>
 
-    <nav>
-      <a href="#home">Trang chủ</a>
-      <a href="#products">Sản phẩm</a>
-      <a href="#about">Giới thiệu</a>
-      <a href="#contact">Liên hệ</a>
-    </nav>
+    <div class="search-container">
+      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
+      <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <a href="#home" class="nav-item">Trang chủ</a>
+        
+        <div class="dropdown">
+          <a href="#products" class="nav-item dropbtn">
+            Sản phẩm <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-content">
+            <a href="#living-room"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
+            <a href="#kitchen"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
+            <a href="#security"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
+            <a href="#lighting"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
+          </div>
+        </div>
+
+        <a href="#about" class="nav-item">Giới thiệu</a>
+        <a href="#contact" class="nav-item">Liên hệ</a>
+      </nav>
+
+      <a href="/login.html" class="login-btn">Đăng nhập</a>
+      
+      <div class="cart-box">
+        <div class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge">0</span>
+        </div>
+        <div class="cart-dropdown">
+          <div class="cart-empty-state">
+            <i class="fa-solid fa-basket-shopping empty-icon"></i>
+            <p>Bạn chưa thêm sản phẩm nào</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
   </header>
 
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-text">
-      <h1>Thiết bị gia dụng thông minh</h1>
+      <h1>Thiết bị thông minh</h1>
 
       <p>
         Mang công nghệ hiện đại đến không gian sống của bạn.
@@ -37,7 +83,7 @@
 
     <div class="hero-image">
       <img
-        src="https://placehold.co/600x400?text=Hero+Image"
+        src="./image/logo.jpg" 
         alt="SmartHome Hero"
       />
     </div>
