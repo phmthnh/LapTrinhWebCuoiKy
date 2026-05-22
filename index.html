@@ -17,7 +17,7 @@
 
 <body>
   // HEADER // 
-  <header>
+  <header id="mainHeader">
     <div class="logo">
       <a href="#home">
         <span>SmartHome</span>
@@ -30,9 +30,13 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </div>
-
+     
+    <button class="menu-toggle" id="menuToggle" >
+      <i class="fa-solid fa-bars" > </i>
+    </button>
+         
     <div class="header-right">
-      <nav>
+      <nav id="navbar">
         <a href="#home" class="nav-item">Trang chủ</a>
         
         <div class="dropdown">
@@ -58,12 +62,24 @@
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="cart-badge">0</span>
         </div>
+
         <div class="cart-dropdown">
-          <div class="cart-empty-state">
-            <i class="fa-solid fa-basket-shopping empty-icon"></i>
-            <p>Bạn chưa thêm sản phẩm nào</p>
-          </div>
-        </div>
+  <div class="cart-empty-state">
+    <i class="fa-solid fa-basket-shopping empty-icon"></i>
+    <p>Bạn chưa thêm sản phẩm nào</p>
+  </div>
+
+  <div class="cart-items-container" style="display: none;">
+    <div class="cart-items-list">
+      </div>
+    <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;" />
+    <div class="cart-total-section" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
+      <span>Tổng tiền:</span>
+      <span class="cart-total-price">0đ</span>
+    </div>
+    <button class="view-cart-btn" style="width: 100%; background: #000; color: #fff; border: none; padding: 10px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-weight: 600;">Xem giỏ hàng</button>
+  </div>
+</div>
       </div>
     </div>
     </div>
@@ -95,43 +111,34 @@
 
     <div class="product-grid">
 
-      <div class="card">
+      <div class="card" data-id="1">
         <img
           src="https://placehold.co/300x200?text=Product+1"
           alt="Robot hút bụi"
-        />
-
-        <h3>Robot hút bụi</h3>
-
-        <p>Tự động làm sạch thông minh.</p>
-
-        <button>Xem thêm</button>
+          class="prod-img" 
+        /> <h3 class="prod-title">Robot hút bụi</h3> <p>Tự động dọn dẹp thông minh.</p>
+        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">1.500.000đ</p>
+        <button class="add-to-cart-btn">Thêm vào giỏ</button>
       </div>
 
-      <div class="card">
+      <div class="card" data-id="2">
         <img
           src="https://placehold.co/300x200?text=Product+2"
           alt="Nồi chiên không dầu"
-        />
-
-        <h3>Nồi chiên không dầu</h3>
-
-        <p>Giảm dầu mỡ, tốt cho sức khỏe.</p>
-
-        <button>Xem thêm</button>
+          class="prod-img"
+        /> <h3 class="prod-title">Nồi chiên không dầu</h3> <p>Giảm dầu mỡ, tốt cho sức khỏe.</p>
+        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">2.300.000đ</p>
+        <button class="add-to-cart-btn">Thêm vào giỏ</button>
       </div>
 
-      <div class="card">
+      <div class="card" data-id="3">
         <img
           src="https://placehold.co/300x200?text=Product+3"
           alt="Máy lọc không khí"
-        />
-
-        <h3>Máy lọc không khí</h3>
-
-        <p>Không khí sạch cho gia đình.</p>
-
-        <button>Xem thêm</button>
+          class="prod-img"
+        /> <h3 class="prod-title">Máy lọc không khí</h3> <p>Không khí sạch cho gia đình.</p>
+        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">3.100.000đ</p>
+        <button class="add-to-cart-btn">Thêm vào giỏ</button>
       </div>
 
     </div>
@@ -178,7 +185,7 @@
     <p>© 2026 SmartHome. All rights reserved.</p>
   </footer>
 
-  <script type="module" src="/main.js"></script>
+  <script src="./main.js"></script>
 
 </body>
 </html>

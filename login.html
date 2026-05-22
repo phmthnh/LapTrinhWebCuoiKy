@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Đăng nhập - SmartHome</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body class="login-page-body">
 
   <header class="login-page-header">
     <div class="login-header-container">
       <div class="logo">
-        <a href="#home">
+        <a href="/index.html">
           <span>SmartHome</span>
         </a>
       </div>
@@ -21,42 +21,101 @@
   </header>
 
   <main class="login-main-content">
-    <div class="login-wrapper">
+    <div class="login-container-split">
       
-      <div class="shopee-login-card">
-        <h2 class="form-title">Đăng nhập</h2>
-        
-        <form action="#">
-          <div class="shopee-input-group">
-            <input type="text" placeholder="Email/Số điện thoại/Tên đăng nhập" required />
-          </div>
+      <div class="login-banner-image-wrapper">
+        <img src="https://placehold.co/700x600?text=Thay+Link+Anh+Cua+Ban+Tai+Day" alt="SmartHome Banner" class="banner-main-img" />
+      </div>
+      
+      <div class="login-form-area">
+        <div class="shopee-login-card">
+          <h2 class="form-title">Đăng nhập</h2>
           
-          <div class="shopee-input-group">
-            <input type="password" placeholder="Mật khẩu" required />
-          </div>
+          <form onsubmit="return false;">
+            <div class="shopee-input-group">
+              <input type="text" placeholder="Email / Số điện thoại / Tên đăng nhập" required />
+            </div>
+            
+            <div class="shopee-input-group">
+              <input type="password" placeholder="Mật khẩu" required />
+            </div>
 
-          <button type="submit" class="shopee-btn-submit">ĐĂNG NHẬP</button>
+            <button type="submit" class="shopee-btn-submit">ĐĂNG NHẬP</button>
 
-          <div class="shopee-form-links">
-            <a href="#" class="link-item">Quên mật khẩu</a>
-            <a href="#" class="link-item highlight">Đăng ký tài khoản</a>
-          </div>
+            <div class="shopee-form-links">
+              <a href="#">Quên mật khẩu</a>
+              <a href="#" class="register-link">Đăng ký</a>
+            </div>
 
-          <div class="shopee-divider">
-            <div class="line"></div>
-            <span>HOẶC</span>
-            <div class="line"></div>
-          </div>
+            <div class="shopee-divider">
+              <div class="line"></div>
+              <span>HOẶC</span>
+              <div class="line"></div>
+            </div>
 
-          <div class="shopee-social-login">
-            <button type="button" class="btn-social fb"><i class="fa-brands fa-facebook"></i> Facebook</button>
-            <button type="button" class="btn-social gg"><i class="fa-brands fa-google"></i> Google</button>
-          </div>
-        </form>
+            <div class="social-login-grid">
+              <button type="button" class="social-btn btn-fb" id="login-fb-btn">
+                <i class="fa-brands fa-facebook-f"></i> Facebook
+              </button>
+              <button type="button" class="social-btn btn-gg" id="login-gg-btn">
+                <i class="fa-brands fa-google"></i> Google
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
     </div>
   </main>
+
+  <div id="custom-popup" class="popup-overlay">
+    <div class="popup-box">
+      <p id="popup-message">Bạn có muốn đăng nhập với Facebook?</p>
+      <div class="popup-actions">
+        <button id="popup-confirm-btn" class="popup-btn btn-confirm">Đồng ý</button>
+        <button id="popup-close-btn" class="popup-btn btn-cancel">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById('custom-popup');
+    const popupMessage = document.getElementById('popup-message');
+    const btnFb = document.getElementById('login-fb-btn');
+    const btnGg = document.getElementById('login-gg-btn');
+    const btnClose = document.getElementById('popup-close-btn');
+    const btnConfirm = document.getElementById('popup-confirm-btn');
+
+    // Khi ấn vào nút Facebook
+    btnFb.addEventListener('click', () => {
+      popupMessage.textContent = 'Bạn có muốn đăng nhập với Facebook?';
+      popup.classList.add('active');
+    });
+
+    // Khi ấn vào nút Google
+    btnGg.addEventListener('click', () => {
+      popupMessage.textContent = 'Bạn có muốn đăng nhập với Google?';
+      popup.classList.add('active');
+    });
+
+    // Khi ấn nút Hủy
+    btnClose.addEventListener('click', () => {
+      popup.classList.remove('active');
+    });
+
+    // Khi ấn nút Đồng ý (Xử lý giả lập thành công)
+    btnConfirm.addEventListener('click', () => {
+      alert('Đang xử lý kết nối đăng nhập...');
+      popup.classList.remove('active');
+    });
+
+    // Ấn vùng ngoài popup để đóng
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
 </html>
