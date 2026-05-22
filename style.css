@@ -540,191 +540,449 @@ footer{
     grid-template-columns: 1fr;
   }
 
-/* ==================== GIAO DIỆN ĐĂNG NHẬP KIỂU SHOPEE (ĐEN - TRẮNG) ==================== */
+/* ==================== LOGIN PAGE (SHOPEE STYLE ĐEN - TRẮNG) ==================== */
 
-/* Reset body riêng cho trang đăng nhập */
+/* Cấu hình body riêng cho trang đăng nhập */
 .login-page-body {
-  background-color: #fafafa; /* Nền xám cực nhẹ bên ngoài */
+  background-color: #f5f5f5; /* Nền xám nhạt nhẹ bên ngoài */
   margin: 0;
   padding: 0;
-  display: block; /* Trả về block thay vì flex để header nằm trên cùng */
+  display: block; 
 }
 
-/* 1. THANH HEADER PHỤ (TRẮNG TINH) */
+/* 1. THANH HEADER PHỤ TRẮNG TINH */
 .login-page-header {
   width: 100%;
   height: 84px;
   background: #ffffff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05); /* Đường đổ bóng mỏng tinh tế */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
-  position: static; /* Không cần fixed */
-  padding: 0;
+  position: static; 
+  padding: 0 50px;
 }
 
 .login-header-container {
   width: 100%;
-  max-width: 1200px; /* Giới hạn độ rộng nội dung */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Chữ "Đăng nhập" nhỏ cạnh Logo */
+.login-page-header .logo a {
+  font-size: 30px;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Chữ Đăng nhập cạnh logo */
 .header-page-title {
   font-size: 20px;
   color: #222222;
   font-weight: 500;
-  border-left: 1px solid #e0e0e0; /* Dấu gạch dọc phân cách */
+  border-left: 1px solid #e0e0e0;
   padding-left: 15px;
   margin-top: 4px;
 }
 
-/* 2. VÙNG THÂN TRANG (NỀN TỐI) */
-.login-main-content {
-  width: 100%;
-  min-height: 600px;
-  /* Đây là màu nền ĐEN/XÁM ĐẬM cho toàn bộ vùng thân */
-  background: #111111; 
-  display: flex;
-  align-items: center;
+/* ==================== GIAO DIỆN ĐĂNG NHẬP CHIA ĐÔI (ĐEN - TRẮNG) ==================== */
+
+.login-page-body {
+  background-color: #f5f5f5; 
+  margin: 0;
+  padding: 0;
+  display: block; 
 }
 
-/* Khung bọc để giới hạn độ rộng form */
-.login-wrapper {
+/* 1. THANH HEADER PHỤ TRẮNG TINH */
+.login-page-header {
+  width: 100%;
+  height: 84px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  position: static; 
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.login-header-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
   display: flex;
-  justify-content: flex-end; /* Đẩy form dính sang bên phải giống Shopee */
+  align-items: center;
+  gap: 15px;
 }
 
-/* 3. KHUNG FORM ĐĂNG NHẬP (TRẮNG NỔI BẬT) */
-.shopee-login-card {
-  background: #ffffff; /* Nền form trắng tinh */
-  width: 400px;
-  padding: 30px;
-  border-radius: 4px; /* Bo tròn góc nhẹ chuyên nghiệp */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Đổ bóng nổi khối */
+.login-page-header .logo a {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
 }
 
-.shopee-login-card .form-title {
+.header-page-title {
   font-size: 20px;
   color: #222222;
   font-weight: 500;
-  margin-bottom: 25px;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 15px;
+  margin-top: 4px;
 }
 
-/* Các ô input nhập liệu */
+/* 2. KHU VỰC THÂN CHÍNH CHỨA CONTAINER CHIA ĐÔI */
+.login-main-content {
+  width: 100%;
+  min-height: calc(100vh - 84px);
+  background: #ffffff; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 50px;
+  box-sizing: border-box;
+}
+
+.login-container-split {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px; 
+}
+
+/* --- BÊN TRÁI: BANNER ẢNH LỚN --- */
+.login-banner-image-wrapper {
+  flex: 1.2; 
+  width: 100%;
+  max-height: 550px;
+  border-radius: 12px;
+  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+/* --- BÊN PHẢI: KHUNG CARD CHỨA FORM --- */
+.login-form-area {
+  flex: 0.9;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.shopee-login-card {
+  background: #ffffff;
+  width: 400px;
+  min-width: 400px; 
+  padding: 40px 35px;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+}
+
+.shopee-login-card .form-title {
+  font-size: 24px;
+  color: #111111;
+  font-weight: 600;
+  margin: 0 0 25px 0;
+}
+
 .shopee-input-group {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 .shopee-input-group input {
   width: 100%;
-  padding: 12px 15px;
+  height: 48px;
+  padding: 0 15px;
   font-size: 14px;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px; /* Góc vuông nhẹ */
-  outline: none;
-  transition: border-color 0.2s;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px; 
+  box-sizing: border-box;
+  transition: all 0.2s;
 }
 
-/* Khi nhấn vào ô nhập, viền hóa đen */
 .shopee-input-group input:focus {
   border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+  outline: none;
 }
 
-/* Nút Đăng nhập to, đen nguyên khối */
 .shopee-btn-submit {
   width: 100%;
-  padding: 13px;
-  background: #000000; /* Màu đen chủ đạo */
-  color: #ffffff;
+  height: 50px;
   border: none;
-  border-radius: 2px;
-  font-size: 14px;
+  border-radius: 8px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.5px;
   cursor: pointer;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-top: 10px;
-  transition: opacity 0.2s;
 }
 
 .shopee-btn-submit:hover {
-  opacity: 0.85; /* Hiệu ứng hover mờ nhẹ sang trọng */
+  background: #333333;
 }
 
-/* Các đường link phụ bên dưới nút bấm */
 .shopee-form-links {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 16px;
+  width: 100%;
 }
 
-.shopee-form-links .link-item {
-  font-size: 12px;
-  color: #0055aa;
+.shopee-form-links a {
+  font-size: 13px;
   text-decoration: none;
+  color: #666666;
 }
 
-.shopee-form-links .link-item.highlight {
-  color: #000000; /* Nổi bật chữ Đăng ký thành màu đen */
-  font-weight: 600;
-}
-
-.shopee-form-links .link-item:hover {
+.shopee-form-links a:hover {
   text-decoration: underline;
 }
 
-/* Đường gạch ngang chữ HOẶC */
+.shopee-form-links .register-link {
+  color: #000000 !important;
+  font-weight: 600;
+}
+
 .shopee-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 25px 0 15px 0;
+  margin: 25px 0 20px 0;
+  width: 100%;
 }
 
 .shopee-divider .line {
   flex: 1;
   height: 1px;
-  background: #dbdbdb;
+  background: #e8e8e8;
 }
 
 .shopee-divider span {
   font-size: 12px;
-  color: #ccc;
+  color: #aaaaaa;
   padding: 0 15px;
 }
 
-/* Nút MXH Đăng nhập nhanh */
-.shopee-social-login {
+/* ĐỊNH DẠNG HÀNG CHỨA 2 NÚT MXH (FACEBOOK & GOOGLE) */
+.social-login-grid {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
 }
 
-.btn-social {
-  flex: 1;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #e0e0e0;
+.social-btn {
+  flex: 1; /* Hai nút tự chia đều nửa chiều rộng khung */
+  height: 46px;
+  border: 1px solid #dcdcdc;
   background: #ffffff;
-  border-radius: 2px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: background 0.2s;
+  font-size: 14px;
+  color: #333333;
+  font-weight: 500;
+  transition: all 0.2s;
+  box-sizing: border-box;
 }
 
-.btn-social:hover {
-  background: #f8f8f8;
+.social-btn:hover {
+  background: #f5f5f5;
+  border-color: #b5b5b5;
 }
 
-.btn-social.fb i { color: #1877f2; }
-.btn-social.gg i { color: #ea4335; }
+.social-btn i {
+  font-size: 15px;
+}
+
+.btn-fb i { color: #1877f2; } /* Màu xanh icon FB */
+.btn-gg i { color: #ea4335; } /* Màu đỏ icon Google */
+
+/* ==================== ĐỊNH DẠNG GIAO DIỆN POP-UP THÔNG BÁO ==================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Nền mờ phía sau */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+/* Lớp kích hoạt để hiển thị popup mượt mà */
+.popup-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-box {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  transform: scale(0.8);
+  transition: all 0.25s ease;
+}
+
+.popup-overlay.active .popup-box {
+  transform: scale(1);
+}
+
+.popup-box p {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.popup-btn {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Nút Đồng ý Đen nguyên khối */
+.btn-confirm {
+  background: #111111;
+  color: #ffffff;
+}
+
+.btn-confirm:hover {
+  background: #333333;
+}
+
+/* Nút Hủy màu Xám/Trắng */
+.btn-cancel {
+  background: #eeeeee;
+  color: #555555;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+/* Tự động tương thích điện thoại */
+@media (max-width: 900px) {
+  .login-main-content { padding: 30px 20px; }
+  .login-container-split { flex-direction: column; gap: 30px; }
+  .login-banner-image-wrapper { max-height: 250px; }
+  .login-form-area { justify-content: center; width: 100%; }
+  .shopee-login-card { width: 100%; min-width: unset; }
+}
+
+
+/* Responsive co giãn màn hình điện thoại */
+@media (max-width: 900px) {
+  .login-main-content {
+    flex-direction: column;
+    padding: 50px 20px !important;
+    gap: 40px;
+  }
+  .login-banner {
+    text-align: center;
+    align-items: center;
+  }
+  .banner-icons {
+    justify-content: center;
+  }
+  .login-form-area {
+    justify-content: center;
+    width: 100%;
+  }
+  .shopee-login-card {
+    width: 100%;
+  }
+}
+
+/* Style cho từng dòng sản phẩm trong mini cart */
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.cart-item-row:last-child {
+  border-bottom: none;
+}
+
+.cart-item-row img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+}
+
+.cart-item-qty-price {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.cart-item-remove:hover {
+  color: #ff3333;
+}
 }
