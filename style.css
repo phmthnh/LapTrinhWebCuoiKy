@@ -95,6 +95,14 @@ header {
   background: #444444; /* Hover chuyển xám đậm */
 }
 
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 /* Khối điều hướng và chức năng dồn sang bên phải */
 .header-right {
   display: flex;
@@ -515,7 +523,11 @@ footer{
   }
 }
 
-@media(max-width: 768px){
+@media(max-width: 768px){ 
+
+.menu-toggle {
+  display: block;
+}
 
   header{
     padding: 0 20px;
@@ -539,7 +551,7 @@ footer{
   .product-grid{
     grid-template-columns: 1fr;
   }
-
+}
 /* ==================== GIAO DIỆN ĐĂNG NHẬP CHIA ĐÔI (ĐEN - TRẮNG) ==================== */
 
 /* Cấu hình body riêng cho trang đăng nhập */
@@ -612,12 +624,31 @@ footer{
   gap: 60px; 
 }
 
+.banner-content h1{
+  font-size: 72px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.banner-content p{
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+.login-banner{
+  flex: 1;
+}
+
+.banner-content{
+  max-width: 500px;
+}
+
 /* --- BÊN TRÁI: BANNER ẢNH LỚN --- */
 .login-banner-image-wrapper {
-  flex: 1.2 !important; 
-  width: 100%;
+  flex:50 !important; 
+  width: 300%;
   max-height: 550px;
-  border-radius: 12px;
+  border-radius: 18px;
   overflow: hidden; 
   display: flex !important;
   align-items: center;

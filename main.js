@@ -81,7 +81,7 @@ const searchInput =
   document.querySelector(".search-container input");
 
 const productCards =
-  document.querySelectorAll(".product-card");
+  document.querySelectorAll(".card");
 
 searchInput.addEventListener("keyup", () => {
 
@@ -108,11 +108,9 @@ searchInput.addEventListener("keyup", () => {
 // ADD TO CART
 // ============================
 
-const cartBadge =
-  document.querySelector(".cart-badge");
 
 const addCartButtons =
-  document.querySelectorAll(".add-cart-btn");
+  document.querySelectorAll(".add-to-cart-btn");
 
 let cartCount = 0;
 
@@ -220,3 +218,13 @@ window.removeFromCart = function(id) {
 
 // Chạy cập nhật giỏ hàng ngay khi tải trang lần đầu
 document.addEventListener('DOMContentLoaded', updateCartUI);
+
+document.getElementById("facebookLogin")
+.addEventListener("click", () => {
+    alert("Chức năng đăng nhập Facebook đang được phát triển!");
+});
+
+document.getElementById("googleLogin")
+.addEventListener("click", () => {
+    alert("Chức năng đăng nhập Google đang được phát triển!");
+});
