@@ -44,10 +44,10 @@
             Sản phẩm <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
           </a>
           <div class="dropdown-content">
-            <a href="#living-room"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
-            <a href="#kitchen"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
-            <a href="#security"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
-            <a href="#lighting"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
+            <a href="living-room.html"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
+            <a href="kitchen.html"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
+            <a href="security.html"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
+            <a href="lighting.html"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
           </div>
         </div>
 
@@ -109,39 +109,94 @@
   <section class="products" id="products">
     <h2>Sản phẩm nổi bật</h2>
 
-    <div class="product-grid">
+    <div class="product-slider">
+
+  <button class="slider-btn prev">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+      <div class="product-track">
 
       <div class="card" data-id="1">
-        <img
-          src="https://placehold.co/300x200?text=Product+1"
-          alt="Robot hút bụi"
-          class="prod-img" 
-        /> <h3 class="prod-title">Robot hút bụi</h3> <p>Tự động dọn dẹp thông minh.</p>
-        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">1.500.000đ</p>
-        <button class="add-to-cart-btn">Thêm vào giỏ</button>
-      </div>
+    <img src="./image/robot-hut-bui.jpg" alt="Robot hút bụi" class="prod-img">
+    <h3 class="prod-title">Robot hút bụi</h3>
+    <p>Tự động dọn dẹp thông minh.</p>
+    <p class="prod-price">1.500.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
 
-      <div class="card" data-id="2">
-        <img
-          src="https://placehold.co/300x200?text=Product+2"
-          alt="Nồi chiên không dầu"
-          class="prod-img"
-        /> <h3 class="prod-title">Nồi chiên không dầu</h3> <p>Giảm dầu mỡ, tốt cho sức khỏe.</p>
-        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">2.300.000đ</p>
-        <button class="add-to-cart-btn">Thêm vào giỏ</button>
-      </div>
+<div class="card" data-id="2">
+    <img src="./image/sofa-da.jpg" alt="Sofa da cao cấp" class="prod-img">
+    <h3 class="prod-title">Sofa da cao cấp</h3>
+    <p>Thiết kế sang trọng cho phòng khách.</p>
+    <p class="prod-price">8.900.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
 
-      <div class="card" data-id="3">
-        <img
-          src="https://placehold.co/300x200?text=Product+3"
-          alt="Máy lọc không khí"
-          class="prod-img"
-        /> <h3 class="prod-title">Máy lọc không khí</h3> <p>Không khí sạch cho gia đình.</p>
-        <p class="prod-price" style="font-weight: bold; margin: 10px 0;">3.100.000đ</p>
-        <button class="add-to-cart-btn">Thêm vào giỏ</button>
-      </div>
+<div class="card" data-id="3">
+    <img src="./image/may-loc-khong-khi.jpg" alt="Máy lọc không khí" class="prod-img">
+    <h3 class="prod-title">Máy lọc không khí</h3>
+    <p>Lọc bụi mịn và khử mùi hiệu quả.</p>
+    <p class="prod-price">3.100.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="4">
+    <img src="./image/tu-lanh.jpg" alt="Tủ lạnh Side By Side" class="prod-img">
+    <h3 class="prod-title">Tủ lạnh Side By Side</h3>
+    <p>Dung tích lớn, tiết kiệm điện.</p>
+    <p class="prod-price">18.500.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="5">
+    <img src="./image/noi-chien.jpg" alt="Nồi chiên không dầu" class="prod-img">
+    <h3 class="prod-title">Nồi chiên không dầu</h3>
+    <p>Giảm dầu mỡ, tốt cho sức khỏe.</p>
+    <p class="prod-price">2.300.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="6">
+    <img src="./image/may-rua-bat.jpg" alt="Máy rửa bát tự động" class="prod-img">
+    <h3 class="prod-title">Máy rửa bát tự động</h3>
+    <p>Làm sạch nhanh chóng và tiện lợi.</p>
+    <p class="prod-price">12.000.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="7">
+    <img src="./image/khoa-van-tay.jpg" alt="Khóa cửa vân tay" class="prod-img">
+    <h3 class="prod-title">Khóa cửa vân tay</h3>
+    <p>Bảo mật hiện đại cho ngôi nhà.</p>
+    <p class="prod-price">4.800.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="8">
+    <img src="./image/camera360.jpg" alt="Camera giám sát 360" class="prod-img">
+    <h3 class="prod-title">Camera giám sát 360°</h3>
+    <p>Quan sát toàn cảnh ngày đêm.</p>
+    <p class="prod-price">1.900.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
+
+<div class="card" data-id="9">
+    <img src="./image/led-wifi.jpg" alt="Bóng đèn LED WiFi" class="prod-img">
+    <h3 class="prod-title">Bóng đèn LED WiFi</h3>
+    <p>Điều khiển từ xa bằng điện thoại.</p>
+    <p class="prod-price">450.000đ</p>
+    <button class="add-to-cart-btn">Thêm vào giỏ</button>
+</div>
 
     </div>
+
+  <button class="slider-btn next">
+     <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+   </div>
+
   </section>
 
   <!-- ABOUT -->

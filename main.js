@@ -219,12 +219,44 @@ window.removeFromCart = function(id) {
 // Chạy cập nhật giỏ hàng ngay khi tải trang lần đầu
 document.addEventListener('DOMContentLoaded', updateCartUI);
 
-document.getElementById("facebookLogin")
-.addEventListener("click", () => {
-    alert("Chức năng đăng nhập Facebook đang được phát triển!");
-});
+const facebookBtn = document.getElementById("facebookLogin");
+const googleBtn = document.getElementById("googleLogin");
 
-document.getElementById("googleLogin")
-.addEventListener("click", () => {
-    alert("Chức năng đăng nhập Google đang được phát triển!");
-});
+if (facebookBtn) {
+    facebookBtn.addEventListener("click", () => {
+        alert("Chức năng đăng nhập Facebook đang được phát triển!");
+    });
+}
+
+if (googleBtn) {
+    googleBtn.addEventListener("click", () => {
+        alert("Chức năng đăng nhập Google đang được phát triển!");
+    });
+}
+
+const track =
+document.querySelector(".product-track");
+
+const nextBtn =
+document.querySelector(".next");
+
+const prevBtn =
+document.querySelector(".prev");
+
+if(track && nextBtn && prevBtn){
+
+  nextBtn.addEventListener("click", () => {
+    track.scrollBy({
+      left: 330,
+      behavior: "smooth"
+    });
+  });
+
+  prevBtn.addEventListener("click", () => {
+    track.scrollBy({
+      left: -330,
+      behavior: "smooth"
+    });
+  });
+
+}
