@@ -1,89 +1,374 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Chiếu sáng thông minh</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
+  <title>Chiếu sáng thông minh</title>
+  <link rel="stylesheet" href="/style.css?v=1780937136962" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
-
-<header class="category-header">
-    
-    <a href="index.html" class="back-home">
-        ← Quay về trang chủ
-    </a>
-
-    <h1>Chiếu sáng thông minh</h1>
-
-    <div class="header-spacer"></div>
-</header>    
-<section class="category-products">
-
-    <div class="category-grid">
-
-        <div class="card">
-            <img src="./image/sofa-da.jpg">
-            <h3>Bóng đèn LED WiFi</h3>
-            <p class="prod-price">8.900.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/ban-tra.jpg">
-            <h3>Đèn trần thông minh</h3>
-            <p class="prod-price">3.200.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/ke-tv.jpg">
-            <h3>Đèn ngủ cảm ứng</h3>
-            <p class="prod-price">2.500.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/ghe-massage.jpg">
-            <h3>Đèn bàn điều khiển giọng nói</h3>
-            <p class="prod-price">15.900.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/den-chum.jpg">
-            <h3>Đèn LED RGB</h3>
-            <p class="prod-price">4.500.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/rem-tu-dong.jpg">
-            <h3>Đèn sân vườn năng lượng mặt trời</h3>
-            <p class="prod-price">3.800.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/dieu-hoa.jpg">
-            <h3>Đèn âm trần</h3>
-            <p class="prod-price">11.000.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/robot-hut-bui.jpg">
-            <h3>Đèn cảm biến hành lang</h3>
-            <p class="prod-price">1.500.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/may-loc-khong-khi.jpg">
-            <h3>Đèn tường hiện đại</h3>
-            <p class="prod-price">3.100.000đ</p>
-        </div>
-
-        <div class="card">
-            <img src="./image/loa-thong-minh.jpg">
-            <h3>Đèn học chống cận</h3>
-            <p class="prod-price">2.200.000đ</p>
-        </div>
-
+  <!-- HEADER -->
+  <header id="mainHeader">
+    <div class="logo">
+      <a href="index.html">
+        <span>SmartHome</span>
+      </a>
     </div>
 
-</section>
+    <div class="search-container">
+      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
+      <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+     
+    <button class="menu-toggle" id="menuToggle" >
+      <i class="fa-solid fa-bars" > </i>
+    </button>
+         
+    <div class="header-right">
+      <nav id="navbar">
+        <a href="index.html" class="nav-item">Trang chủ</a>
+        
+        <div class="dropdown">
+          <a href="#" class="nav-item dropbtn">
+            Sản phẩm <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-content">
+            <a href="all-products.html"><i class="fa-solid fa-border-all"></i> Tất cả sản phẩm</a>
+            <a href="living-room.html"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
+            <a href="kitchen.html"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
+            <a href="security.html"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
+            <a href="lighting.html"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
+          </div>
+        </div>
 
+        <a href="index.html#about" class="nav-item">Giới thiệu</a>
+        <a href="index.html#contact" class="nav-item">Liên hệ</a>
+      </nav>
+
+      <a href="login.html" class="login-btn">Đăng nhập</a>
+      
+      <div class="cart-box">
+        <div class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge">0</span>
+        </div>
+
+        <div class="cart-dropdown">
+          <div class="cart-empty-state">
+            <i class="fa-solid fa-basket-shopping empty-icon"></i>
+            <p>Bạn chưa thêm sản phẩm nào</p>
+          </div>
+          <div class="cart-items-container" style="display: none;">
+            <div class="cart-items-list">
+            </div>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;" />
+            <div class="cart-total-section" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
+              <span>Tổng tiền:</span>
+              <span class="cart-total-price">0đ</span>
+            </div>
+            <button class="view-cart-btn" style="width: 100%; background: #000; color: #fff; border: none; padding: 10px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-weight: 600;">Xem giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="catalog-container">
+    <!-- Sidebar -->
+    <aside class="catalog-sidebar">
+      <div class="sidebar-widget">
+        
+        <h3 class="sidebar-title">Category</h3>
+        <ul class="category-list">
+          <li onclick="window.location.href='all-products.html'">All Products <span>40</span></li>
+          <li onclick="window.location.href='kitchen.html'">Kitchen <span>10</span></li>
+          <li onclick="window.location.href='living-room.html'">Living Room <span>10</span></li>
+          <li onclick="window.location.href='lighting.html'" class="active">Lighting <span>10</span></li>
+          <li onclick="window.location.href='security.html'">Security <span>10</span></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title">Price Range</h3>
+        <div class="price-slider-container">
+          <input type="range" class="price-range-input" min="0" max="1000" value="1000" step="10">
+          <div class="price-labels">
+            <span>$0</span>
+            <span>$1,000+</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title" style="font-size: 14px; text-transform: uppercase; color: #888; letter-spacing: 1px;">Availability</h3>
+        <div class="availability-pills">
+          <div class="pill active">In Stock</div>
+          <div class="pill">New Arrival</div>
+        </div>
+      </div>
+    
+      <div class="sidebar-actions">
+        <button class="btn-reset">Reset</button>
+        <button class="btn-apply">Apply Filter</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="catalog-main">
+      <div class="catalog-header">
+        <div class="catalog-title-area">
+          <span>Catalog</span>
+          <h1>Chiếu sáng thông minh</h1>
+        </div>
+        <div class="catalog-sort">
+          <select>
+            <option>Sort by: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="premium-grid">
+            <div class="loading-overlay"><div class="spinner"></div></div>
+        
+        <div class="premium-card" data-id="li1">
+          <div class="pcard-img-wrapper">
+            <div class="pcard-badge badge-premium">PREMIUM</div>
+            <img src="./image/sofa-da.jpg" alt="Bóng đèn LED WiFi">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Bóng đèn LED WiFi</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$298</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li2">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/ban-tra.jpg" alt="Đèn trần thông minh">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn trần thông minh</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$783</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li3">
+          <div class="pcard-img-wrapper">
+            <div class="pcard-badge badge-sale">SALE</div>
+            <img src="./image/ke-tv.jpg" alt="Đèn ngủ cảm ứng">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn ngủ cảm ứng</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$952</div>
+                <div class="pcard-old-price">$902</div>
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li4">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/ghe-massage.jpg" alt="Đèn bàn điều khiển giọng nói">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn bàn điều khiển giọng nói</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$912</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li5">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/den-chum.jpg" alt="Đèn LED RGB">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn LED RGB</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$868</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li6">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/rem-tu-dong.jpg" alt="Đèn sân vườn năng lượng mặt trời">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn sân vườn năng lượng mặt trời</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$131</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li7">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/dieu-hoa.jpg" alt="Đèn âm trần">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn âm trần</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$766</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li8">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/robot-hut-bui.jpg" alt="Đèn cảm biến hành lang">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn cảm biến hành lang</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$762</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li9">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/may-loc-khong-khi.jpg" alt="Đèn tường hiện đại">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn tường hiện đại</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$779</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card" data-id="li10">
+          <div class="pcard-img-wrapper">
+            
+            <img src="./image/loa-thong-minh.jpg" alt="Đèn học chống cận">
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-cat">Chiếu sáng</div>
+            <div class="pcard-title">Đèn học chống cận</div>
+            <div class="pcard-desc">Advanced smart home technology ensuring peak performance and seamless automation.</div>
+            <div class="pcard-divider"></div>
+            <div class="pcard-footer">
+              <div class="pcard-price-area">
+                <div class="pcard-price">$771</div>
+                
+              </div>
+              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="catalog-pagination">
+        <a href="#" class="page-btn"><i class="fa-solid fa-chevron-left"></i></a>
+        <a href="#" class="page-btn active">1</a>
+        <a href="#" class="page-btn">2</a>
+        <a href="#" class="page-btn">3</a>
+        <a href="#" class="page-btn"><i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+    </main>
+  </div>
+
+
+  <footer class="premium-footer">
+    <div class="footer-top">
+      <div class="footer-logo">SmartHome</div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div>© 2026 SmartHome Precision Tech. All rights reserved.</div>
+      <div class="footer-icons">
+        <i class="fa-solid fa-globe"></i>
+        <i class="fa-solid fa-share-nodes"></i>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
 </body>
 </html>
