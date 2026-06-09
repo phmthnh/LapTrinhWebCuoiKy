@@ -1,140 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
-  
-  <title>Đăng nhập - SmartHome</title>
-
-  <link rel="stylesheet" href="/style.css" />
-
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="icon" type="image/jpeg" href="/public/favicon.ico.jpg" />
+  <title>Tài khoản - SmartHome</title>
+  <meta name="description" content="Đăng nhập hoặc tạo tài khoản SmartHome để lưu giỏ hàng và theo dõi đơn hàng." />
+  <link rel="stylesheet" href="/style.css?v=20260610-10" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 
-<body class="login-page-body">
+<body class="home-page auth-page">
+  <header id="mainHeader" class="home-header">
+    <div class="home-header-inner">
+      <a class="home-brand" href="index.html#home" aria-label="SmartHome - Trang chủ">SmartHome</a>
 
-  <!-- HEADER -->
-  <header class="login-page-header">
-    <div class="login-header-container">
+      <nav id="navbar" class="home-nav" aria-label="Điều hướng chính">
+        <a href="index.html#home" class="nav-item">Home</a>
+        <div class="home-products-menu" id="homeProductsMenu">
+          <button
+            class="nav-item home-products-trigger"
+            id="homeProductsTrigger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="homeMegaMenu"
+            data-nav-target="products"
+          >
+            Products
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
 
-      <div class="logo">
-        <a href="/index.html">
-          <span>SmartHome</span>
+          <div class="home-mega-menu" id="homeMegaMenu">
+            <div class="home-shell home-mega-layout">
+              <div class="home-mega-intro">
+                <p class="home-mega-eyebrow">SmartHome Ecosystem</p>
+                <h2>Thiết bị thông minh cho mọi không gian sống</h2>
+                <p>Khám phá giải pháp gia dụng, chiếu sáng và an ninh trong một hệ sinh thái tiện nghi.</p>
+                <a class="home-mega-all-link" href="all-products.html">
+                  Xem tất cả sản phẩm <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+
+              <div class="home-mega-categories" aria-label="Danh mục sản phẩm">
+                <a class="home-mega-category home-mega-category-wide" href="all-products.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-border-all"></i></span>
+                  <span><strong>Tất cả sản phẩm</strong><small>Khám phá toàn bộ hệ sinh thái SmartHome</small></span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+                <a class="home-mega-category" href="kitchen.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-kitchen-set"></i></span>
+                  <span><strong>Nhà bếp</strong><small>Thiết bị nấu ăn hiện đại</small></span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+                <a class="home-mega-category" href="living-room.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-couch"></i></span>
+                  <span><strong>Phòng khách</strong><small>Robot và thiết bị làm sạch</small></span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+                <a class="home-mega-category" href="lighting.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                  <span><strong>Chiếu sáng</strong><small>Đèn và công tắc thông minh</small></span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+                <a class="home-mega-category" href="security.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                  <span><strong>An ninh</strong><small>Camera và khóa cửa bảo mật</small></span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="home-mega-meta">
+              <div class="home-shell home-mega-meta-inner">
+                <span><i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển</span>
+                <span><i class="fa-solid fa-rotate-left"></i> Đổi trả trong 30 ngày</span>
+                <span><i class="fa-solid fa-headset"></i> Hỗ trợ kỹ thuật 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#about" class="nav-item">Technology</a>
+        <a href="index.html#contact" class="nav-item">Support</a>
+      </nav>
+
+      <div class="home-header-actions">
+        <a class="home-search" href="all-products.html?search=1" aria-label="Tìm kiếm sản phẩm">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </a>
+        <a class="home-start-button active" href="login.html">Tài khoản</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
-
-      <span class="header-page-title">Đăng nhập</span>
-
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="login-main-content"> 
-
-    <div class="login-container-split"> 
-
-    <!-- LEFT -->
-    <div class="login-banner">
-
-      <div class="banner-content">
-
-        <h1>Smart Living</h1>
-
-        <p>
-          Công nghệ hiện đại cho không gian sống tiện nghi hơn.
+  <main class="auth-main">
+    <section class="auth-shell">
+      <div class="auth-showcase">
+        <p class="auth-eyebrow">SmartHome Account</p>
+        <h1>Một tài khoản cho toàn bộ ngôi nhà thông minh</h1>
+        <p class="auth-lead">
+          Lưu giỏ hàng, theo dõi đơn đặt mua và tiếp tục lựa chọn sản phẩm trên mọi trang của website.
         </p>
 
-        <div class="banner-icons">
-
-          <div class="icon-box">
-            <i class="fa-solid fa-house"></i>
-            <span>Nhà thông minh</span>
-          </div>
-
-          <div class="icon-box">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>An toàn</span>
-          </div>
-
-          <div class="icon-box">
-            <i class="fa-solid fa-wifi"></i>
-            <span>Kết nối hiện đại</span>
-          </div>
-
+        <div class="auth-benefits">
+          <article>
+            <span><i class="fa-solid fa-bag-shopping"></i></span>
+            <div><strong>Giỏ hàng riêng</strong><p>Mặt hàng được ghi theo đúng tài khoản đang đăng nhập.</p></div>
+          </article>
+          <article>
+            <span><i class="fa-solid fa-receipt"></i></span>
+            <div><strong>Lịch sử đơn hàng</strong><p>Mỗi đơn đặt mua được lưu và hiển thị theo người dùng.</p></div>
+          </article>
+          <article>
+            <span><i class="fa-solid fa-shield-halved"></i></span>
+            <div><strong>Thông tin được bảo vệ</strong><p>Mật khẩu được băm trước khi lưu trong trình duyệt.</p></div>
+          </article>
         </div>
 
+        <a class="auth-catalog-link" href="all-products.html">
+          Khám phá sản phẩm <i class="fa-solid fa-arrow-right"></i>
+        </a>
       </div>
 
-    </div>
-
-    <!-- RIGHT -->
-    <div class="login-form-area">
-
-      <div class="shopee-login-card">
-
-        <h2 class="form-title">Đăng nhập</h2>
-
-        <form>
-
-          <div class="shopee-input-group">
-            <input
-              type="text"
-              placeholder="Email / Số điện thoại / Tên đăng nhập"
-              required
-            />
+      <div class="auth-panel">
+        <div class="auth-card" id="authFormsCard">
+          <div class="auth-card-heading">
+            <p>Chào mừng đến SmartHome</p>
+            <h2 id="authFormTitle">Đăng nhập tài khoản</h2>
           </div>
 
-          <div class="shopee-input-group">
-            <input
-              type="password"
-              placeholder="Mật khẩu"
-              required
-            />
+          <div class="auth-tabs" role="tablist" aria-label="Chọn hình thức tài khoản">
+            <button class="active" type="button" data-auth-view="login">Đăng nhập</button>
+            <button type="button" data-auth-view="register">Đăng ký</button>
           </div>
 
-          <button type="submit" class="shopee-btn-submit">
-            ĐĂNG NHẬP
-          </button>
+          <div class="auth-message" id="authMessage" role="status" hidden></div>
 
-          <div class="shopee-form-links">
-            <a href="#">Quên mật khẩu</a>
-            <a href="#" class="register-link">Đăng ký</a>
-          </div>
-
-          <div class="shopee-divider">
-            <div class="line"></div>
-            <span>HOẶC</span>
-            <div class="line"></div>
-          </div>
-
-          <div class="social-login-grid">
-
-            <button type="button" class="social-btn"
-                    id="facebookLogin">
-              <i class="fa-brands fa-facebook-f"></i>
-              Facebook
+          <form class="auth-form active" id="loginForm" data-auth-form="login">
+            <label>
+              <span>Email hoặc số điện thoại</span>
+              <div class="auth-input-wrap">
+                <i class="fa-regular fa-user"></i>
+                <input id="loginIdentifier" type="text" autocomplete="username" required
+                  placeholder="email@example.com hoặc 0912345678" />
+              </div>
+            </label>
+            <label class="auth-password-field">
+              <span class="auth-label-row">
+                <span>Mật khẩu</span>
+                <button class="auth-text-button" type="button" data-auth-view="reset">
+                  Quên mật khẩu?
+                </button>
+              </span>
+              <div class="auth-input-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input id="loginPassword" type="password" autocomplete="current-password" required
+                  placeholder="Nhập mật khẩu" />
+                <button type="button" data-password-toggle="loginPassword" aria-label="Hiện mật khẩu">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </label>
+            <button class="auth-submit" type="submit">
+              Đăng nhập <i class="fa-solid fa-arrow-right"></i>
             </button>
+          </form>
 
-            <button type="button" class="social-btn"
-                    id="googleLogin">
-              <i class="fa-brands fa-google"></i>
-              Google
+          <form class="auth-form" id="registerForm" data-auth-form="register">
+            <div class="auth-field-grid">
+              <label>
+                <span>Họ và tên</span>
+                <div class="auth-input-wrap">
+                  <i class="fa-regular fa-user"></i>
+                  <input id="registerName" type="text" autocomplete="name" required placeholder="Nguyễn Văn A" />
+                </div>
+              </label>
+              <label>
+                <span>Số điện thoại</span>
+                <div class="auth-input-wrap">
+                  <i class="fa-solid fa-phone"></i>
+                  <input id="registerPhone" type="tel" autocomplete="tel" placeholder="0912345678" />
+                </div>
+              </label>
+            </div>
+            <label>
+              <span>Email</span>
+              <div class="auth-input-wrap">
+                <i class="fa-regular fa-envelope"></i>
+                <input id="registerEmail" type="email" autocomplete="email" required placeholder="email@example.com" />
+              </div>
+            </label>
+            <label>
+              <span>Mật khẩu</span>
+              <div class="auth-input-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input id="registerPassword" type="password" autocomplete="new-password" minlength="6" required
+                  placeholder="Tối thiểu 6 ký tự" />
+                <button type="button" data-password-toggle="registerPassword" aria-label="Hiện mật khẩu">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </label>
+            <label>
+              <span>Xác nhận mật khẩu</span>
+              <div class="auth-input-wrap">
+                <i class="fa-solid fa-shield-halved"></i>
+                <input id="registerConfirmPassword" type="password" autocomplete="new-password" minlength="6" required
+                  placeholder="Nhập lại mật khẩu" />
+              </div>
+            </label>
+            <label class="auth-consent">
+              <input id="registerConsent" type="checkbox" required />
+              <span>Tôi đồng ý lưu thông tin tài khoản trên trình duyệt này.</span>
+            </label>
+            <button class="auth-submit" type="submit">
+              Tạo tài khoản <i class="fa-solid fa-user-plus"></i>
             </button>
+          </form>
 
+          <form class="auth-form" id="resetForm" data-auth-form="reset">
+            <button class="auth-back-button" type="button" data-auth-view="login">
+              <i class="fa-solid fa-arrow-left"></i> Quay lại đăng nhập
+            </button>
+            <p class="auth-form-description">
+              Nhập email hoặc số điện thoại đã đăng ký và đặt mật khẩu mới.
+            </p>
+            <label>
+              <span>Email hoặc số điện thoại</span>
+              <div class="auth-input-wrap">
+                <i class="fa-regular fa-user"></i>
+                <input id="resetIdentifier" type="text" required placeholder="Thông tin tài khoản" />
+              </div>
+            </label>
+            <label>
+              <span>Mật khẩu mới</span>
+              <div class="auth-input-wrap">
+                <i class="fa-solid fa-key"></i>
+                <input id="resetPassword" type="password" minlength="6" required placeholder="Tối thiểu 6 ký tự" />
+                <button type="button" data-password-toggle="resetPassword" aria-label="Hiện mật khẩu">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </label>
+            <button class="auth-submit" type="submit">Cập nhật mật khẩu</button>
+          </form>
+
+          <p class="auth-security-note">
+            <i class="fa-solid fa-circle-info"></i>
+            Dữ liệu tài khoản của bản demo được lưu cục bộ trên thiết bị này.
+          </p>
+        </div>
+
+        <div class="auth-card auth-profile-card account-dashboard" id="authProfileCard" hidden>
+          <header class="account-dashboard-header">
+            <div class="auth-profile-avatar" id="authProfileAvatar">SH</div>
+            <div class="account-profile-identity">
+              <div class="account-member-row">
+                <span class="account-member-status"><i></i> Tài khoản đang hoạt động</span>
+                <span class="account-member-since" id="authMemberSince">Thành viên SmartHome</span>
+              </div>
+              <h2 id="authProfileName">SmartHome User</h2>
+              <div class="account-profile-contact">
+                <span><i class="fa-regular fa-envelope"></i><b id="authProfileEmail"></b></span>
+                <span id="authProfilePhoneWrap"><i class="fa-solid fa-phone"></i><b id="authProfilePhone"></b></span>
+              </div>
+            </div>
+            <button class="account-logout-top" id="authLogoutButton" type="button">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+            </button>
+          </header>
+
+          <div class="auth-profile-stats">
+            <div><strong id="authCartCount">0</strong><span>Sản phẩm trong giỏ</span></div>
+            <div><strong id="authOrderCount">0</strong><span>Đơn hàng đã đặt</span></div>
+            <div><strong id="authOrderTotal">$0</strong><span>Tổng giá trị đơn</span></div>
           </div>
 
-        </form>
+          <nav class="account-dashboard-nav" aria-label="Quản lý tài khoản">
+            <button class="active" type="button" data-account-view="overview">
+              <i class="fa-solid fa-chart-pie"></i> Tổng quan
+            </button>
+            <button type="button" data-account-view="profile">
+              <i class="fa-regular fa-user"></i> Hồ sơ & địa chỉ
+            </button>
+            <button type="button" data-account-view="cart">
+              <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
+            </button>
+            <button type="button" data-account-view="orders">
+              <i class="fa-solid fa-receipt"></i> Đơn hàng
+            </button>
+          </nav>
 
+          <section class="account-dashboard-section active" data-account-section="overview">
+            <div class="account-section-heading">
+              <div><p>Tổng quan tài khoản</p><h3>Xin chào, <span id="accountGreetingName"></span></h3></div>
+              <a id="authContinueLink" href="all-products.html">Tiếp tục mua sắm <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="account-overview-grid">
+              <article>
+                <span><i class="fa-solid fa-location-dot"></i></span>
+                <div><small>Địa chỉ mặc định</small><strong id="accountDefaultAddress">Chưa cập nhật</strong></div>
+              </article>
+              <article>
+                <span><i class="fa-solid fa-truck-fast"></i></span>
+                <div><small>Đơn gần nhất</small><strong id="accountLatestOrder">Chưa có đơn hàng</strong></div>
+              </article>
+              <article>
+                <span><i class="fa-solid fa-shield-halved"></i></span>
+                <div><small>Trạng thái tài khoản</small><strong>Đã xác thực cục bộ</strong></div>
+              </article>
+            </div>
+            <div class="account-preview-block">
+              <div class="account-preview-heading"><h3>Đơn hàng gần đây</h3><button type="button" data-account-view="orders">Xem tất cả</button></div>
+              <div id="accountRecentOrders"></div>
+            </div>
+          </section>
+
+          <section class="account-dashboard-section" data-account-section="profile">
+            <div class="account-section-heading">
+              <div><p>Thông tin cá nhân</p><h3>Hồ sơ và địa chỉ giao hàng</h3></div>
+            </div>
+            <div class="auth-message" id="accountProfileMessage" hidden></div>
+            <form class="account-profile-form" id="accountProfileForm">
+              <label><span>Họ và tên</span><input id="accountName" type="text" required /></label>
+              <label><span>Email</span><input id="accountEmail" type="email" disabled /></label>
+              <label><span>Số điện thoại</span><input id="accountPhone" type="tel" pattern="[0-9]{9,11}" /></label>
+              <label class="account-field-wide"><span>Địa chỉ cụ thể</span><input id="accountAddressLine" type="text" /></label>
+              <label><span>Phường / Xã</span><input id="accountWard" type="text" /></label>
+              <label><span>Quận / Huyện</span><input id="accountDistrict" type="text" /></label>
+              <label class="account-field-wide"><span>Tỉnh / Thành phố</span><input id="accountCity" type="text" /></label>
+              <label class="account-field-wide"><span>Ghi chú giao hàng</span><textarea id="accountAddressNote" rows="3"></textarea></label>
+              <button class="auth-submit account-profile-submit" type="submit">Lưu thay đổi</button>
+            </form>
+          </section>
+
+          <section class="account-dashboard-section" data-account-section="cart">
+            <div class="account-section-heading">
+              <div><p>Giỏ hàng của bạn</p><h3>Mặt hàng đang lưu</h3></div>
+              <a href="checkout.html">Đi tới thanh toán <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="account-product-list" id="accountCartItems"></div>
+          </section>
+
+          <section class="account-dashboard-section" data-account-section="orders">
+            <div class="account-section-heading">
+              <div><p>Lịch sử mua hàng</p><h3>Đơn hàng của bạn</h3></div>
+            </div>
+            <div class="account-order-list" id="accountOrderItems"></div>
+          </section>
+        </div>
       </div>
-
-    </div>
-
-  </div>
-
+    </section>
   </main>
 
+  <footer class="auth-footer">
+    <span>© 2026 SmartHome Precision Tech.</span>
+    <div><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="index.html#contact">Contact Us</a></div>
+  </footer>
+
+  <script type="module" src="./main.js?v=20260610-4"></script>
+  <script type="module" src="./login.js?v=20260610-5"></script>
 </body>
 </html>

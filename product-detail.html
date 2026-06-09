@@ -6,7 +6,7 @@
   <link rel="icon" type="image/jpeg" href="/public/favicon.ico.jpg" />
   <title>Chi tiết sản phẩm - SmartHome</title>
   <meta name="description" content="Xem chi tiết thông tin sản phẩm SmartHome - thiết bị gia dụng thông minh thế hệ mới." />
-  <link rel="stylesheet" href="/style.css?v=20260609-8" />
+  <link rel="stylesheet" href="/style.css?v=20260610-5" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
   <style>
@@ -20,70 +20,10 @@
       min-height: 100vh;
     }
 
-    /* ── HEADER (đồng bộ SmartHome) ──────────────── */
-    .detail-header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: #fff;
-      border-bottom: 1px solid #e8ecf0;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      transition: box-shadow 0.3s;
-    }
-    .detail-header.scrolled {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    }
-    .detail-header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    .detail-brand {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #111;
-      text-decoration: none;
-      letter-spacing: -0.5px;
-      flex-shrink: 0;
-    }
-    .detail-nav {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-left: auto;
-    }
-    .detail-nav a {
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #475569;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .detail-nav a:hover {
-      background: #f1f5f9;
-      color: #111;
-    }
-    .detail-nav .nav-cta {
-      background: #111;
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .detail-nav .nav-cta:hover {
-      background: #333;
-      color: #fff;
-    }
     .detail-breadcrumb-bar {
       background: #fff;
       border-bottom: 1px solid #e8ecf0;
-      margin-top: 68px;
+      margin-top: 80px;
     }
     .detail-breadcrumb-inner {
       max-width: 1280px;
@@ -152,7 +92,7 @@
       position: absolute;
       top: 16px;
       left: 16px;
-      background: linear-gradient(135deg, #0066ff, #00b4d8);
+      background: #111;
       color: #fff;
       font-size: 0.72rem;
       font-weight: 700;
@@ -176,7 +116,7 @@
       overflow: hidden;
       flex-shrink: 0;
     }
-    .detail-thumb.active { border-color: #0066ff; }
+    .detail-thumb.active { border-color: #111; }
     .detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .detail-thumb i { font-size: 1.2rem; color: #94a3b8; }
 
@@ -191,8 +131,8 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #f0f7ff;
-      color: #0066ff;
+      background: #f1f1f2;
+      color: #111;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 5px 12px;
@@ -221,7 +161,7 @@
     .detail-price {
       font-size: 2.2rem;
       font-weight: 800;
-      color: #0066ff;
+      color: #111;
       letter-spacing: -1px;
     }
     .detail-old-price {
@@ -263,10 +203,10 @@
     }
     .detail-feature-icon {
       width: 28px; height: 28px;
-      background: #f0f7ff;
+      background: #f1f1f2;
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      color: #0066ff;
+      color: #111;
       font-size: 0.75rem;
       flex-shrink: 0;
     }
@@ -330,16 +270,16 @@
       font-size: 0.95rem;
       font-weight: 700;
       border-radius: 12px;
-      border: 2px solid #0066ff;
+      border: 2px solid #111;
       background: #fff;
-      color: #0066ff;
+      color: #111;
       cursor: pointer;
       transition: all 0.25s;
     }
     .btn-cart:hover {
-      background: #0066ff;
+      background: #111;
       color: #fff;
-      box-shadow: 0 6px 20px rgba(0,102,255,0.2);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.16);
     }
     .btn-buy {
       flex: 1;
@@ -355,8 +295,8 @@
       transition: all 0.25s;
     }
     .btn-buy:hover {
-      background: #0066ff;
-      box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+      background: #292929;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
 
     /* Trust badges */
@@ -374,7 +314,7 @@
       font-size: 0.82rem;
       color: #475569;
     }
-    .trust-item i { color: #0066ff; font-size: 0.9rem; }
+    .trust-item i { color: #111; font-size: 0.9rem; }
 
     /* ── SPECS SECTION ────────────────────────────── */
     .detail-specs-section {
@@ -419,18 +359,19 @@
 
     /* ── FOOTER ───────────────────────────────────── */
     .detail-footer {
-      background: #0f172a;
-      color: #94a3b8;
+      background: #f4f4f5;
+      color: #606068;
+      border-top: 1px solid #dedee1;
       text-align: center;
       padding: 24px 32px;
       font-size: 0.85rem;
       margin-top: 80px;
     }
     .detail-footer a {
-      color: #94a3b8;
+      color: #606068;
       text-decoration: none;
     }
-    .detail-footer a:hover { color: #fff; }
+    .detail-footer a:hover { color: #111; }
 
     /* ── TOAST ────────────────────────────────────── */
     .detail-toast {
@@ -462,7 +403,6 @@
       .detail-specs-grid { grid-template-columns: 1fr; }
       .spec-row:nth-child(even) { padding-left: 0; border-left: none; }
       .detail-main { padding: 24px 16px 60px; }
-      .detail-header-inner { padding: 0 16px; }
       .detail-breadcrumb-inner { padding: 10px 16px; }
     }
     @media (max-width: 560px) {
@@ -473,18 +413,113 @@
     }
   </style>
 </head>
-<body class="detail-page">
+<body class="home-page detail-page">
 
   <!-- HEADER -->
-  <header class="detail-header" id="detailHeader">
-    <div class="detail-header-inner">
-      <a class="detail-brand" href="index.html">SmartHome</a>
-      <nav class="detail-nav">
-        <a href="index.html">Trang chủ</a>
-        <a href="all-products.html">Sản phẩm</a>
-        <a href="index.html#contact">Hỗ trợ</a>
-        <a href="login.html" class="nav-cta">Đăng nhập</a>
+  <header id="mainHeader" class="home-header">
+    <div class="home-header-inner">
+      <a class="home-brand" href="index.html#home" aria-label="SmartHome - Trang chủ">SmartHome</a>
+
+      <nav id="navbar" class="home-nav" aria-label="Điều hướng chính">
+        <a href="index.html#home" class="nav-item">Home</a>
+        <div class="home-products-menu" id="homeProductsMenu">
+          <button
+            class="nav-item home-products-trigger active"
+            id="homeProductsTrigger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="homeMegaMenu"
+            data-nav-target="products"
+          >
+            Products
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
+
+          <div class="home-mega-menu" id="homeMegaMenu">
+            <div class="home-shell home-mega-layout">
+              <div class="home-mega-intro">
+                <p class="home-mega-eyebrow">SmartHome Ecosystem</p>
+                <h2>Thiết bị thông minh cho mọi không gian sống</h2>
+                <p>
+                  Khám phá các giải pháp gia dụng, chiếu sáng và an ninh được kết
+                  nối trong một hệ sinh thái tối giản, tiện nghi.
+                </p>
+                <a class="home-mega-all-link" href="all-products.html">
+                  Xem tất cả sản phẩm
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+
+              <div class="home-mega-categories" aria-label="Danh mục sản phẩm">
+                <a class="home-mega-category home-mega-category-wide" href="all-products.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-border-all"></i></span>
+                  <span>
+                    <strong>Tất cả sản phẩm</strong>
+                    <small>Khám phá toàn bộ hệ sinh thái SmartHome</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="kitchen.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-kitchen-set"></i></span>
+                  <span>
+                    <strong>Nhà bếp</strong>
+                    <small>Thiết bị nấu ăn hiện đại</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="living-room.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-couch"></i></span>
+                  <span>
+                    <strong>Phòng khách</strong>
+                    <small>Robot và thiết bị làm sạch</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="lighting.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                  <span>
+                    <strong>Chiếu sáng</strong>
+                    <small>Đèn và công tắc thông minh</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="security.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                  <span>
+                    <strong>An ninh</strong>
+                    <small>Camera và khóa cửa bảo mật</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="home-mega-meta">
+              <div class="home-shell home-mega-meta-inner">
+                <span><i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển</span>
+                <span><i class="fa-solid fa-rotate-left"></i> Đổi trả trong 30 ngày</span>
+                <span><i class="fa-solid fa-headset"></i> Hỗ trợ kỹ thuật 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#about" class="nav-item">Technology</a>
+        <a href="index.html#contact" class="nav-item">Support</a>
       </nav>
+
+      <div class="home-header-actions">
+        <a class="home-search" href="all-products.html?search=1" aria-label="Tìm kiếm sản phẩm">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <a class="home-start-button" href="login.html">Get Started</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -662,12 +697,6 @@
   </div>
 
   <script>
-    // ── Sticky header ──────────────────────────────
-    const header = document.getElementById('detailHeader');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
     // ── Toast helper ───────────────────────────────
     function showToast(msg) {
       const toast = document.getElementById('detailToast');
@@ -703,8 +732,10 @@
       const p = new URLSearchParams(window.location.search);
       const title = p.get('title');
       const price = p.get('price');
+      const oldPrice = p.get('oldPrice');
       const img   = p.get('img');
       const desc  = p.get('desc');
+      const category = p.get('category');
 
       if (title) {
         document.getElementById('product-title').textContent = title;
@@ -713,9 +744,12 @@
       }
       if (price) {
         document.getElementById('product-price').textContent = price;
-        document.getElementById('product-old-price').textContent = '';
-        document.querySelector('.detail-savings').style.display = 'none';
+        const oldPriceElement = document.getElementById('product-old-price');
+        oldPriceElement.textContent = oldPrice || '';
+        oldPriceElement.style.display = oldPrice ? '' : 'none';
+        document.querySelector('.detail-savings').style.display = oldPrice ? '' : 'none';
       }
+      if (category) document.getElementById('product-category').textContent = category;
       if (img) {
         const mainImg = document.getElementById('product-img');
         mainImg.src = img;
@@ -731,13 +765,33 @@
     });
 
     // ── Cart & Buy buttons ────────────────────────
+    function getDetailProduct() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        id: params.get('id') || `detail-${Date.now()}`,
+        name: document.getElementById('product-title').textContent.trim(),
+        category: document.getElementById('product-category').textContent.trim(),
+        description: document.getElementById('product-desc').textContent.trim(),
+        price: document.getElementById('product-price').textContent.trim(),
+        oldPrice: document.getElementById('product-old-price').textContent.trim(),
+        image: document.getElementById('product-img').src,
+        fallbackImage: '/images/home/space-devices.jpg'
+      };
+    }
+
     document.getElementById('btn-add-cart').addEventListener('click', () => {
-      const title = document.getElementById('product-title').textContent;
-      showToast(`Đã thêm "${title}" vào giỏ hàng!`);
+      const product = getDetailProduct();
+      document.dispatchEvent(new CustomEvent('smarthome:add-product', {
+        detail: { product }
+      }));
+      showToast(`Đã thêm "${product.name}" vào giỏ hàng!`);
     });
     document.getElementById('btn-buy-now').addEventListener('click', () => {
-      showToast('Đang chuyển đến thanh toán...');
-      setTimeout(() => window.location.href = 'login.html', 900);
+      const product = getDetailProduct();
+      document.dispatchEvent(new CustomEvent('smarthome:add-product', {
+        detail: { product, openCart: true }
+      }));
+      showToast('Sản phẩm đã được thêm vào giỏ hàng.');
     });
 
     // ── Image error fallback ───────────────────────
@@ -745,5 +799,6 @@
       this.src = '/public/images/home/space-devices.jpg';
     });
   </script>
+  <script type="module" src="./main.js?v=20260610-4"></script>
 </body>
 </html>
