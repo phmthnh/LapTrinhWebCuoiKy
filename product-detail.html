@@ -1,212 +1,397 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
-    <title>Chi tiết sản phẩm - SmartHome</title>
-    <link rel="stylesheet" href="style.css?v=1780937136999" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <style>
-        /* CSS riêng dành cho trang chi tiết sản phẩm để không làm ảnh hưởng file style.css cũ */
-        .product-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi tiết sản phẩm - SmartHome Shopee Style</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="/style.css" />
 
-        .product-images {
-            flex: 1;
-            min-width: 300px;
-        }
+  <style>
+    /* TOÀN BỘ CSS PHỤC VỤ GIAO DIỆN MUA BÁN TRONG ẢNH */
+    .shopee-detail-body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding-top: 110px; /* Tránh đè Header */
+      padding-bottom: 60px;
+    }
 
-        .main-img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
+    .shopee-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+      display: flex;
+      padding: 20px;
+      gap: 35px;
+    }
 
-        .product-info {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+    /* Bên trái: Ảnh sản phẩm lớn */
+    .shopee-left {
+      width: 450px;
+      flex-shrink: 0;
+    }
 
-        .product-title {
-            font-size: 2rem;
-            color: #333;
-            margin: 0;
-        }
+    .shopee-img-box {
+      width: 100%;
+      height: 450px;
+      border: 1px solid #rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
 
-        .product-price-detail {
-            font-size: 1.8rem;
-            color: #e44d26;
-            font-weight: bold;
-        }
+    .shopee-img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
 
-        .product-desc {
-            line-height: 1.6;
-            color: #666;
-            font-size: 1rem;
-        }
+    /* Bên phải: Thông tin mua bán */
+    .shopee-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .prod-title-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
 
-        .quantity-btn {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
+    .mall-badge {
+      background-color: #d0011b;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 4px;
+      border-radius: 2px;
+      line-height: 1;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
 
-        .quantity-btn:hover {
-            background-color: #ddd;
-        }
+    .prod-title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: rgba(0,0,0,0.8);
+      margin: 0;
+    }
 
-        .quantity-input {
-            width: 50px;
-            text-align: center;
-            padding: 8px;
-            font-size: 1.1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    /* Đánh giá sao & Đã bán giống ảnh mẫu */
+    .prod-meta-status {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
 
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .btn-add-cart, .btn-buy-now {
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-add-cart {
-            background-color: #fff;
-            color: #2575fc;
-            border: 2px solid #2575fc;
-        }
-
-        .btn-add-cart:hover {
-            background-color: #2575fc;
-            color: #fff;
-        }
-
-        .btn-buy-now {
-            background-color: #ff4757;
-            color: white;
-        }
-
-        .btn-buy-now:hover {
-            background-color: #e84118;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .product-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header class="category-header">
-        <a href="index.html" class="back-home">
-            <i class="fa-solid fa-arrow-left"></i> Quay về trang chủ
-        </a>
-    </header>
-
-    <main class="product-container">
-        
-        <div class="product-images">
-            <img src="./image/sofa-da.jpg" alt="Tên sản phẩm" class="main-img" id="detail-img">
-        </div>
-
-        <div class="product-info">
-            <h1 class="product-title" id="detail-title">Tủ lạnh Side By Side</h1>
-            <div class="product-price-detail" id="detail-price">8.900.000đ</div>
-            
-            <p class="product-desc">
-                Sản phẩm thông minh thế hệ mới tích hợp công nghệ AI vượt trội, giúp tiết kiệm điện năng, thiết kế sang trọng đẳng cấp phù hợp với không gian SmartHome của bạn. Bảo hành chính hãng lên tới 24 tháng.
-            </p>
-
-            <div class="quantity-selector">
-                <label for="quantity">Số lượng:</label>
-                <button class="quantity-btn" onclick="changeQty(-1)">-</button>
-                <input type="number" id="quantity" class="quantity-input" value="1" min="1">
-                <button class="quantity-btn" onclick="changeQty(1)">+</button>
-            </div>
-
-            <div class="action-buttons">
-                <button class="btn-add-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
-                </button>
-                <button class="btn-buy-now">Mua ngay</button>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        // 1. Hàm tăng giảm số lượng nhanh (đã có từ trước)
-        function changeQty(amt) {
-            var qtyInput = document.getElementById('quantity');
-            var currentVal = parseInt(qtyInput.value) || 1;
-            var newVal = currentVal + amt;
-            if (newVal >= 1) {
-                qtyInput.value = newVal;
-            }
-        }
-
-        // 2. ĐOẠN CODE MỚI: Tự động lấy thông tin từ URL để hiển thị lên trang
-        window.addEventListener('DOMContentLoaded', () => {
-            // Lấy các tham số từ thanh địa chỉ (URL)
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            const productTitle = urlParams.get('title');
-            const productPrice = urlParams.get('price');
-            const productImg = urlParams.get('img');
-
-            // Nếu có dữ liệu truyền sang thì mới thay đổi giao diện
-            if (productTitle) {
-                document.getElementById('detail-title').innerText = productTitle;
-            }
-            if (productPrice) {
-                document.getElementById('detail-price').innerText = productPrice;
-            }
-            if (productImg) {
-                document.getElementById('detail-img').src = productImg;
-            }
-        });
-    </script>
+    .rating-stars {
+      color: #ee4d2d;
+      border-right: 1px solid rgba(0,0,0,0.1);
+      padding-right: 15px;
+    }
     
+    .rating-stars span {
+      text-decoration: underline;
+      color: #ee4d2d;
+      margin-right: 5px;
+      font-weight: 500;
+    }
+
+    .sold-count {
+      color: #767676;
+    }
+    .sold-count strong {
+      color: #222;
+      font-weight: 500;
+    }
+
+    /* Khung giá tiền nổi bật màu cam shopee */
+    .shopee-price-box {
+      background: #fafafa;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .price-original {
+      text-decoration: line-through;
+      color: #929292;
+      font-size: 16px;
+    }
+
+    .price-current {
+      color: #ee4d2d;
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    /* Khung chính sách bảo hiểm / Vận chuyển */
+    .shopee-info-row {
+      display: flex;
+      margin-bottom: 25px;
+      font-size: 14px;
+      align-items: center;
+    }
+
+    .info-label {
+      width: 110px;
+      color: #757575;
+      flex-shrink: 0;
+    }
+
+    .info-content {
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-content i {
+      color: #00bfa5;
+    }
+
+    .prod-description {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    /* Số lượng */
+    .quantity-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(0,0,0,0.14);
+      border-radius: 2px;
+      height: 32px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 100%;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: #fcfcfc;
+    }
+
+    .qty-input {
+      width: 50px;
+      height: 100%;
+      border: none;
+      border-left: 1px solid rgba(0,0,0,0.14);
+      border-right: 1px solid rgba(0,0,0,0.14);
+      text-align: center;
+      font-size: 16px;
+      color: rgba(0,0,0,0.8);
+      outline: none;
+    }
+
+    /* BỘ ĐÔI NÚT MUA HÀNG TRONG ẢNH MẪU */
+    .shopee-action-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn-add-to-cart {
+      background: rgba(255,87,34,0.1);
+      border: 1px solid #ee4d2d;
+      color: #ee4d2d;
+      padding: 0 20px;
+      height: 48px;
+      font-size: 15px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      transition: background 0.2s;
+    }
+
+    .btn-add-to-cart:hover {
+      background: rgba(255,87,34,0.15);
+    }
+
+    .btn-buy-now-orange {
+      background: #ee4d2d;
+      color: #fff;
+      border: none;
+      padding: 0 40px;
+      height: 48px;
+      font-size: 15px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-weight: 400;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.09);
+    }
+
+    .btn-buy-now-orange:hover {
+      background: #d73d20;
+    }
+
+    @media (max-width: 768px) {
+      .shopee-container { flex-direction: column; padding: 15px; }
+      .shopee-left { width: 100%; }
+      .shopee-img-box { height: 300px; }
+      .shopee-action-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body class="shopee-detail-body">
+
+  <header id="mainHeader">
+    <div class="logo">
+      <a href="index.html"><span>SmartHome</span></a>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
+      <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div class="header-right">
+      <nav id="navbar">
+        <a href="index.html" class="nav-item">Trang chủ</a>
+        <a href="all-products.html" class="nav-item">Sản phẩm</a>
+        <a href="login.html" class="nav-item">Đăng nhập</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shopee-container">
+    
+    <div class="shopee-left">
+      <div class="shopee-img-box">
+        <img id="shopee-product-img" src="" alt="Ảnh sản phẩm mua bán" />
+      </div>
+    </div>
+
+    <div class="shopee-right">
+      <div class="prod-title-wrapper">
+        <span class="mall-badge">Mall</span>
+        <h1 id="shopee-product-title" class="prod-title">Tên sản phẩm thiết bị thông minh</h1>
+      </div>
+
+      <div class="prod-meta-status">
+        <div class="rating-stars">
+          <span>5.0</span>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="sold-count">
+          <strong>1,2k</strong> Đã Bán
+        </div>
+      </div>
+
+      <div class="shopee-price-box">
+        <span id="shopee-price-old" class="price-original"></span>
+        <span id="shopee-price-current" class="price-current">$0</span>
+      </div>
+
+      <div class="shopee-info-row">
+        <div class="info-label">Chính sách</div>
+        <div class="info-content">
+          <i class="fa-solid fa-shield-heart"></i> Trả hàng 15 ngày / Đổi trả miễn phí nhanh chóng
+        </div>
+      </div>
+
+      <div class="shopee-info-row">
+        <div class="info-label">Vận chuyển</div>
+        <div class="info-content">
+          <i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển toàn quốc cho đơn hàng SmartHome
+        </div>
+      </div>
+
+      <div class="shopee-info-row" style="align-items: flex-start;">
+        <div class="info-label">Chi tiết</div>
+        <div id="shopee-product-desc" class="prod-description">
+          Đang tải thông tin chi tiết của thiết bị kỹ thuật số...
+        </div>
+      </div>
+
+      <div class="quantity-row">
+        <div class="info-label">Số lượng</div>
+        <div class="quantity-control">
+          <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
+          <input type="text" id="shopee-qty" class="qty-input" value="1" readonly />
+          <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+        </div>
+      </div>
+
+      <div class="shopee-action-buttons">
+        <button class="btn-add-to-cart" onclick="alert('Đã thêm sản phẩm thành công vào giỏ hàng!')">
+          <i class="fa-solid fa-cart-plus"></i> Thêm Vào Giỏ Hàng
+        </button>
+        <button class="btn-buy-now-orange" onclick="alert('Đang chuyển hướng tới cổng thanh toán an toàn!')">
+          Mua Ngay
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Xử lý tăng giảm số lượng sản phẩm mua bán
+    function changeQuantity(val) {
+      const qtyInput = document.getElementById('shopee-qty');
+      let currentNum = parseInt(qtyInput.value) || 1;
+      currentNum += val;
+      if(currentNum >= 1) {
+        qtyInput.value = currentNum;
+      }
+    }
+
+    // Nhặt dữ liệu tự động từ các trang danh mục ném sang
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const title = params.get('title');
+      const price = params.get('price');
+      const img = params.get('img');
+      const desc = params.get('desc');
+
+      if (title) document.getElementById('shopee-product-title').innerText = title;
+      if (img) document.getElementById('shopee-product-img').src = img;
+      
+      if (price) {
+        document.getElementById('shopee-price-current').innerText = price;
+        // Tính toán toán học tạo giá cũ (Original Price) gạch chân cho giống thật
+        let numericPrice = parseInt(price.replace(/[^0-9]/g, '')) || 100;
+        document.getElementById('shopee-price-old').innerText = '$' + Math.floor(numericPrice * 1.3);
+      }
+
+      if (desc && desc.trim() !== "") {
+        document.getElementById('shopee-product-desc').innerText = desc;
+      } else if (title) {
+        document.getElementById('shopee-product-desc').innerText = `Hệ thống ${title} phân phối chính hãng 100% tại SmartHome Mall. Sản phẩm sở hữu thiết kế đột phá, độ bền linh kiện chuẩn công nghệ Châu Âu và tích hợp bộ vi xử lý tiết kiệm năng lượng tối đa.`;
+      }
+    });
+  </script>
 </body>
 </html>

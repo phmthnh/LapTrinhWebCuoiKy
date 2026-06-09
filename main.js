@@ -357,3 +357,33 @@ function getPrice(card) {
   const text = card.querySelector('.pcard-price').textContent;
   return parseInt(text.replace(/[^0-9]/g, '')) || 0;
 }
+
+// =======================================================
+// SỰ KIỆN CLICK SẢN PHẨM: TỰ ĐỘNG CHUYỂN SANG SHOPEE DETAIL
+// =======================================================
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (e) => {
+    // Nhận diện xem người dùng có click vào card sản phẩm hay không
+    const card = e.target.closest(".premium-card");
+    
+    if (card) {
+      e.preventDefault();
+
+      // Bốc tách thông tin trực tiếp từ giao diện của Card đó
+      const title = card.querySelector(".pcard-title")?.textContent.trim() || "";
+      const price = card.querySelector(".pcard-price")?.textContent.trim() || "";
+      const img = card.querySelector(".pcard-img-wrapper img")?.getAttribute("src") || "";
+      const desc = card.querySelector(".pcard-desc")?.textContent.trim() || "";
+
+      // Đóng gói các tham số dưới dạng chuỗi URL an toàn
+      const urlParams = new URLSearchParams();
+      urlParams.append("title", title);
+      urlParams.append("price", price);
+      urlParams.append("img", img);
+      urlParams.append("desc", desc);
+
+      // Chuyển hướng màn hình sang giao diện mua bán shopee duy nhất
+      window.location.href = `./product-detail.html?${urlParams.toString()}`;
+    }
+  });
+});
