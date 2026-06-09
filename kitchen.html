@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
   <title>Nhà bếp hiện đại</title>
-  <link rel="stylesheet" href="/style.css?v=20260609-8" />
+  <link rel="stylesheet" href="/style.css?v=20260609-9" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body class="home-page catalog-page">
   <!-- HEADER -->
-    <!-- HEADER -->
   <header id="mainHeader" class="home-header">
     <div class="home-header-inner">
       <a class="home-brand" href="index.html#home" aria-label="SmartHome - Trang chủ">SmartHome</a>
@@ -122,14 +121,13 @@
     <!-- Sidebar -->
     <aside class="catalog-sidebar">
       <div class="sidebar-widget">
-        
-        <h3 class="sidebar-title">Category</h3>
-        <ul class="category-list">
-          <li onclick="window.location.href='all-products.html'">All Products <span>40</span></li>
-          <li onclick="window.location.href='kitchen.html'" class="active">Kitchen <span>10</span></li>
-          <li onclick="window.location.href='living-room.html'">Living Room <span>10</span></li>
-          <li onclick="window.location.href='lighting.html'">Lighting <span>10</span></li>
-          <li onclick="window.location.href='security.html'">Security <span>10</span></li>
+        <h3 class="sidebar-title">Danh mục</h3>
+        <ul class="category-list catalog-category-filter">
+          <li><button type="button" data-category-filter="all" onclick="window.location.href='all-products.html'">Tất cả sản phẩm <span>40</span></button></li>
+          <li><button type="button" class="active" data-category-filter="nha bep">Nhà bếp <span>10</span></button></li>
+          <li><button type="button" data-category-filter="phong khach" onclick="window.location.href='living-room.html'">Phòng khách <span>10</span></button></li>
+          <li><button type="button" data-category-filter="chieu sang" onclick="window.location.href='lighting.html'">Chiếu sáng <span>10</span></button></li>
+          <li><button type="button" data-category-filter="an ninh" onclick="window.location.href='security.html'">An ninh <span>10</span></button></li>
         </ul>
       </div>
 
@@ -158,7 +156,7 @@
           <button type="button" class="pill" data-product-tag="sale">Giảm giá</button>
         </div>
       </div>
-    
+
       <div class="sidebar-actions">
         <button class="btn-reset">Đặt lại</button>
         <button class="btn-apply">Xem kết quả</button>
@@ -167,6 +165,27 @@
 
     <!-- Main Content -->
     <main class="catalog-main">
+      <section class="catalog-search-panel" aria-labelledby="catalogSearchLabel">
+        <form class="catalog-search-form" id="catalogSearchForm" role="search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="sr-only" id="catalogSearchLabel" for="catalogSearchInput">Tìm kiếm sản phẩm</label>
+          <input
+            id="catalogSearchInput"
+            type="search"
+            autocomplete="off"
+            placeholder="Tìm theo tên, danh mục hoặc tính năng sản phẩm..."
+          />
+          <button type="submit">Tìm kiếm</button>
+        </form>
+        <div class="catalog-search-feedback">
+          <p id="catalogSearchStatus">Nhà bếp hiện đại - 10 sản phẩm</p>
+          <button id="catalogSearchClear" type="button" hidden>
+            Xóa bộ lọc
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </section>
+
       <div class="catalog-header">
         <div class="catalog-title-area">
           <span>Catalog</span>
@@ -183,8 +202,8 @@
       </div>
 
       <div class="premium-grid">
-            <div class="loading-overlay"><div class="spinner"></div></div>
-        
+        <div class="loading-overlay"><div class="spinner"></div></div>
+
         <div class="premium-card" data-id="k1">
           <div class="pcard-img-wrapper">
             <div class="pcard-badge badge-premium">PREMIUM</div>
@@ -198,16 +217,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$349</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k2">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/ban-tra.jpg" alt="Bếp từ âm đôi">
           </div>
           <div class="pcard-body">
@@ -218,13 +235,12 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$673</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k3">
           <div class="pcard-img-wrapper">
             <div class="pcard-badge badge-sale">SALE</div>
@@ -244,10 +260,9 @@
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k4">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/ghe-massage.jpg" alt="Lò nướng đa năng">
           </div>
           <div class="pcard-body">
@@ -258,16 +273,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$724</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k5">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/den-chum.jpg" alt="Máy hút mùi">
           </div>
           <div class="pcard-body">
@@ -278,16 +291,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$385</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k6">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/rem-tu-dong.jpg" alt="Máy pha cà phê">
           </div>
           <div class="pcard-body">
@@ -298,16 +309,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$139</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k7">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/dieu-hoa.jpg" alt="Nồi chiên không dầu">
           </div>
           <div class="pcard-body">
@@ -318,16 +327,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$256</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k8">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/robot-hut-bui.jpg" alt="Máy lọc nước RO">
           </div>
           <div class="pcard-body">
@@ -338,16 +345,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$590</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k9">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/may-loc-khong-khi.jpg" alt="Lò vi sóng thông minh">
           </div>
           <div class="pcard-body">
@@ -358,16 +363,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$397</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="k10">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/loa-thong-minh.jpg" alt="Máy xay sinh tố">
           </div>
           <div class="pcard-body">
@@ -378,13 +381,12 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$445</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
       </div>
 
       <div class="catalog-pagination">
@@ -418,6 +420,6 @@
     </div>
   </footer>
 
-  <script type="module" src="./main.js?v=20260609-8"></script>
+  <script type="module" src="./main.js?v=20260609-9"></script>
 </body>
 </html>

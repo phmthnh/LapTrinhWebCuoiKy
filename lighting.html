@@ -122,14 +122,13 @@
     <!-- Sidebar -->
     <aside class="catalog-sidebar">
       <div class="sidebar-widget">
-        
-        <h3 class="sidebar-title">Category</h3>
-        <ul class="category-list">
-          <li onclick="window.location.href='all-products.html'">All Products <span>40</span></li>
-          <li onclick="window.location.href='kitchen.html'">Kitchen <span>10</span></li>
-          <li onclick="window.location.href='living-room.html'">Living Room <span>10</span></li>
-          <li onclick="window.location.href='lighting.html'" class="active">Lighting <span>10</span></li>
-          <li onclick="window.location.href='security.html'">Security <span>10</span></li>
+        <h3 class="sidebar-title">Danh mục</h3>
+        <ul class="category-list catalog-category-filter">
+          <li><button type="button" data-category-filter="all" onclick="window.location.href='all-products.html'">Tất cả sản phẩm <span>40</span></button></li>
+          <li><button type="button" data-category-filter="nha bep" onclick="window.location.href='kitchen.html'">Nhà bếp <span>10</span></button></li>
+          <li><button type="button" data-category-filter="phong khach" onclick="window.location.href='living-room.html'">Phòng khách <span>10</span></button></li>
+          <li><button type="button" class="active" data-category-filter="chieu sang">Chiếu sáng <span>10</span></button></li>
+          <li><button type="button" data-category-filter="an ninh" onclick="window.location.href='security.html'">An ninh <span>10</span></button></li>
         </ul>
       </div>
 
@@ -167,6 +166,27 @@
 
     <!-- Main Content -->
     <main class="catalog-main">
+      <section class="catalog-search-panel" aria-labelledby="catalogSearchLabel">
+        <form class="catalog-search-form" id="catalogSearchForm" role="search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="sr-only" id="catalogSearchLabel" for="catalogSearchInput">Tìm kiếm sản phẩm</label>
+          <input
+            id="catalogSearchInput"
+            type="search"
+            autocomplete="off"
+            placeholder="Tìm theo tên, danh mục hoặc tính năng sản phẩm..."
+          />
+          <button type="submit">Tìm kiếm</button>
+        </form>
+        <div class="catalog-search-feedback">
+          <p id="catalogSearchStatus">Chiếu sáng thông minh - 10 sản phẩm</p>
+          <button id="catalogSearchClear" type="button" hidden>
+            Xóa bộ lọc
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </section>
+
       <div class="catalog-header">
         <div class="catalog-title-area">
           <span>Catalog</span>

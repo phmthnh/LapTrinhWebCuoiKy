@@ -3,525 +3,747 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
+  <link rel="icon" type="image/jpeg" href="/public/favicon.ico.jpg" />
   <title>Chi tiết sản phẩm - SmartHome</title>
-  
-  <link rel="stylesheet" href="/style.css?v=1780937136999" />
+  <meta name="description" content="Xem chi tiết thông tin sản phẩm SmartHome - thiết bị gia dụng thông minh thế hệ mới." />
+  <link rel="stylesheet" href="/style.css?v=20260609-8" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
   <style>
-    /* CSS Premium bổ sung riêng cho trang chi tiết sản phẩm */
-    .detail-main {
-      padding-top: 120px; /* Tránh bị che bởi Fixed Header */
-      max-width: 1200px;
-      margin: 0 auto 60px auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
+    /* ── RESET & BASE ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .detail-container {
-      display: flex;
-      gap: 50px;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.05);
-    }
-
-    .detail-left {
-      flex: 1;
-      max-width: 500px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    .detail-left img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .detail-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .detail-badge {
-      align-self: flex-start;
-      background: linear-gradient(135deg, #0066ff 0%, #00d2ff 100%);
-      color: white;
-      padding: 6px 16px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border-radius: 20px;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-    }
-
-    .detail-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
+    body.detail-page {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #f4f6f9;
       color: #1a202c;
-      margin-bottom: 10px;
-      font-weight: 700;
+      min-height: 100vh;
     }
 
-    .detail-price {
-      font-size: 2rem;
-      color: #0066ff;
-      font-weight: 700;
-      margin-bottom: 25px;
+    /* ── HEADER (đồng bộ SmartHome) ──────────────── */
+    .detail-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: #fff;
+      border-bottom: 1px solid #e8ecf0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s;
     }
-
-    .detail-desc-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #1a202c;
-      margin-bottom: 8px;
+    .detail-header.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
     }
-
-    .detail-desc {
-      color: #64748b;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
-
-    /* Bộ chọn số lượng */
-    .quantity-section {
+    .detail-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 68px;
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 35px;
+      gap: 24px;
     }
-
-    .qty-label {
+    .detail-brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #111;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .detail-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .detail-nav a {
+      text-decoration: none;
+      font-size: 0.9rem;
       font-weight: 500;
       color: #475569;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
     }
-
-    .qty-wrapper {
+    .detail-nav a:hover {
+      background: #f1f5f9;
+      color: #111;
+    }
+    .detail-nav .nav-cta {
+      background: #111;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .detail-nav .nav-cta:hover {
+      background: #333;
+      color: #fff;
+    }
+    .detail-breadcrumb-bar {
+      background: #fff;
+      border-bottom: 1px solid #e8ecf0;
+      margin-top: 68px;
+    }
+    .detail-breadcrumb-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 32px;
       display: flex;
       align-items: center;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      overflow: hidden;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    .detail-breadcrumb-inner a {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .detail-breadcrumb-inner a:hover { color: #111; }
+    .detail-breadcrumb-inner .sep { color: #cbd5e1; }
+    .detail-breadcrumb-inner .current { color: #111; font-weight: 500; }
+
+    /* ── MAIN WRAPPER ─────────────────────────────── */
+    .detail-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
     }
 
-    .qty-btn {
-      background: #f1f5f9;
-      border: none;
-      width: 40px;
-      height: 40px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: background 0.2s;
+    /* ── PRODUCT CARD ─────────────────────────────── */
+    .detail-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 48px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
 
-    .qty-btn:hover {
-      background: #e2e8f0;
-    }
-
-    .qty-input {
-      width: 50px;
-      height: 40px;
-      text-align: center;
-      border: none;
-      border-left: 1px solid #cbd5e1;
-      border-right: 1px solid #cbd5e1;
-      font-size: 1rem;
-      font-weight: 600;
-      outline: none;
-    }
-
-    /* Các nút hành động */
-    .detail-actions {
+    /* ── LEFT: IMAGE ──────────────────────────────── */
+    .detail-image-panel {
       display: flex;
-      gap: 20px;
+      flex-direction: column;
+      gap: 16px;
     }
-
-    .btn-add-cart {
-      flex: 1;
-      background: #ffffff;
-      color: #0066ff;
-      border: 2px solid #0066ff;
-      padding: 15px 30px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
+    .detail-image-main {
+      background: #f8fafc;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      position: relative;
+    }
+    .detail-image-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform 0.4s ease;
+    }
+    .detail-image-main:hover img {
+      transform: scale(1.04);
+    }
+    .detail-badge-overlay {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: linear-gradient(135deg, #0066ff, #00b4d8);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .detail-thumbs {
+      display: flex;
       gap: 10px;
-      transition: all 0.3s;
     }
-
-    .btn-add-cart:hover {
-      background: #0066ff;
-      color: white;
-      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.2);
-    }
-
-    .btn-buy-now {
-      flex: 1;
-      background: #000000;
-      color: #ffffff;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1rem;
-      font-weight: 600;
+    .detail-thumb {
+      width: 72px; height: 72px;
+      background: #f1f5f9;
       border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: all 0.3s;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .detail-thumb.active { border-color: #0066ff; }
+    .detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-thumb i { font-size: 1.2rem; color: #94a3b8; }
+
+    /* ── RIGHT: INFO ──────────────────────────────── */
+    .detail-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+    }
+    .detail-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0f7ff;
+      color: #0066ff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    .detail-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .detail-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .detail-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
+    .detail-rating-count { font-size: 0.85rem; color: #64748b; }
+    .detail-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .detail-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0066ff;
+      letter-spacing: -1px;
+    }
+    .detail-old-price {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .detail-savings {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #16a34a;
+      background: #dcfce7;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .detail-divider {
+      height: 1px;
+      background: #e8ecf0;
+      border: none;
+    }
+    .detail-desc {
+      font-size: 0.97rem;
+      color: #475569;
+      line-height: 1.75;
     }
 
-    .btn-buy-now:hover {
-      background: #2575fc;
-      box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+    /* Features */
+    .detail-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .detail-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: #374151;
+    }
+    .detail-feature-icon {
+      width: 28px; height: 28px;
+      background: #f0f7ff;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: #0066ff;
+      font-size: 0.75rem;
+      flex-shrink: 0;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .detail-container {
-        flex-direction: column;
-        padding: 20px;
-      }
-      .detail-left {
-        max-width: 100%;
-      }
-      .detail-title {
-        font-size: 2rem;
-      }
-      .detail-actions {
-        flex-direction: column;
-      }
+    /* Quantity */
+    .detail-qty-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .detail-qty-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    .detail-qty-control {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .detail-qty-btn {
+      background: #f8fafc;
+      border: none;
+      width: 42px; height: 42px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #475569;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .detail-qty-btn:hover { background: #e2e8f0; color: #111; }
+    .detail-qty-input {
+      width: 56px; height: 42px;
+      text-align: center;
+      border: none;
+      border-left: 1.5px solid #e2e8f0;
+      border-right: 1.5px solid #e2e8f0;
+      font-size: 1rem;
+      font-weight: 700;
+      outline: none;
+      color: #111;
+    }
+    .detail-stock {
+      font-size: 0.82rem;
+      color: #16a34a;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* Action buttons */
+    .detail-actions {
+      display: flex;
+      gap: 14px;
+    }
+    .btn-cart {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 12px;
+      border: 2px solid #0066ff;
+      background: #fff;
+      color: #0066ff;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-cart:hover {
+      background: #0066ff;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(0,102,255,0.2);
+    }
+    .btn-buy {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-buy:hover {
+      background: #0066ff;
+      box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+    }
+
+    /* Trust badges */
+    .detail-trust {
+      display: flex;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid #e8ecf0;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #475569;
+    }
+    .trust-item i { color: #0066ff; font-size: 0.9rem; }
+
+    /* ── SPECS SECTION ────────────────────────────── */
+    .detail-specs-section {
+      margin-top: 48px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 48px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .detail-specs-section h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+    .detail-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+    .spec-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #e8ecf0;
+      gap: 16px;
+    }
+    .spec-row:nth-child(odd) { padding-right: 32px; }
+    .spec-row:nth-child(even) { padding-left: 32px; border-left: 1px solid #e8ecf0; }
+    .spec-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 500;
+      min-width: 130px;
+    }
+    .spec-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1a202c;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    .detail-footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 24px 32px;
+      font-size: 0.85rem;
+      margin-top: 80px;
+    }
+    .detail-footer a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+    .detail-footer a:hover { color: #fff; }
+
+    /* ── TOAST ────────────────────────────────────── */
+    .detail-toast {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      background: #111;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 9999;
+    }
+    .detail-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .detail-toast i { color: #4ade80; }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .detail-card { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
+      .detail-specs-section { padding: 28px; }
+      .detail-specs-grid { grid-template-columns: 1fr; }
+      .spec-row:nth-child(even) { padding-left: 0; border-left: none; }
+      .detail-main { padding: 24px 16px 60px; }
+      .detail-header-inner { padding: 0 16px; }
+      .detail-breadcrumb-inner { padding: 10px 16px; }
+    }
+    @media (max-width: 560px) {
+      .detail-title { font-size: 1.5rem; }
+      .detail-price { font-size: 1.7rem; }
+      .detail-actions { flex-direction: column; }
+      .detail-trust { gap: 12px; }
     }
   </style>
 </head>
-<body>
+<body class="detail-page">
 
-  <header id="mainHeader">
-    <div class="logo">
-      <a href="index.html">
-        <span>SmartHome</span>
-      </a>
-    </div>
-
-    <div class="search-container">
-      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
-      <button class="search-btn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </div>
-     
-    <button class="menu-toggle" id="menuToggle">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-         
-    <div class="header-right">
-      <nav id="navbar">
-        <a href="index.html" class="nav-item">Trang chủ</a>
-        <a href="all-products.html" class="nav-item">Sản phẩm</a>
-        <a href="login.html" class="nav-item">Đăng nhập</a>
+  <!-- HEADER -->
+  <header class="detail-header" id="detailHeader">
+    <div class="detail-header-inner">
+      <a class="detail-brand" href="index.html">SmartHome</a>
+      <nav class="detail-nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="all-products.html">Sản phẩm</a>
+        <a href="index.html#contact">Hỗ trợ</a>
+        <a href="login.html" class="nav-cta">Đăng nhập</a>
       </nav>
     </div>
   </header>
 
+  <!-- BREADCRUMB -->
+  <div class="detail-breadcrumb-bar">
+    <div class="detail-breadcrumb-inner">
+      <a href="index.html"><i class="fa-solid fa-house" style="font-size:.8rem"></i> Trang chủ</a>
+      <span class="sep"><i class="fa-solid fa-chevron-right" style="font-size:.65rem"></i></span>
+      <a href="all-products.html">Sản phẩm</a>
+      <span class="sep"><i class="fa-solid fa-chevron-right" style="font-size:.65rem"></i></span>
+      <span class="current" id="breadcrumb-title">Chi tiết sản phẩm</span>
+    </div>
+  </div>
+
   <main class="detail-main">
-    <div class="detail-container">
-      
-      <div class="detail-left">
-        <img id="product-img" src="" alt="Hình ảnh sản phẩm" />
+    <!-- PRODUCT CARD -->
+    <div class="detail-card">
+
+      <!-- LEFT: IMAGE -->
+      <div class="detail-image-panel">
+        <div class="detail-image-main">
+          <div class="detail-badge-overlay">PREMIUM</div>
+          <img id="product-img" src="/public/images/home/product-vacuum.jpg" alt="Hình ảnh sản phẩm" />
+        </div>
+        <div class="detail-thumbs">
+          <div class="detail-thumb active" id="thumb-0">
+            <img id="thumb-img-0" src="/public/images/home/product-vacuum.jpg" alt="Ảnh 1" />
+          </div>
+          <div class="detail-thumb" id="thumb-1">
+            <img src="/public/images/home/product-airfryer.jpg" alt="Ảnh 2" />
+          </div>
+          <div class="detail-thumb" id="thumb-2">
+            <img src="/public/images/home/product-airpurifier.jpg" alt="Ảnh 3" />
+          </div>
+          <div class="detail-thumb" style="cursor:default">
+            <i class="fa-solid fa-ellipsis"></i>
+          </div>
+        </div>
       </div>
 
-      <div class="detail-right">
-        <div class="detail-badge">PREMIUM PRODUCT</div>
-        <h1 id="product-title" class="detail-title">Tên sản phẩm</h1>
-        <div id="product-price" class="detail-price">$0</div>
-        
-        <div class="detail-desc-title">Mô tả sản phẩm:</div>
-        <p id="product-desc" class="detail-desc">
-          Đang tải dữ liệu mô tả sản phẩm thông minh...
+      <!-- RIGHT: INFO -->
+      <div class="detail-info-panel">
+
+        <div class="detail-category-tag">
+          <i class="fa-solid fa-microchip"></i>
+          <span id="product-category">SmartHome</span>
+        </div>
+
+        <h1 class="detail-title" id="product-title">Robot hút bụi thông minh</h1>
+
+        <div class="detail-rating">
+          <span class="detail-stars">★★★★★</span>
+          <span class="detail-rating-count">4.9 · 128 đánh giá</span>
+        </div>
+
+        <div class="detail-price-row">
+          <div class="detail-price" id="product-price">$60</div>
+          <div class="detail-old-price" id="product-old-price">$80</div>
+          <div class="detail-savings">Tiết kiệm 25%</div>
+        </div>
+
+        <hr class="detail-divider" />
+
+        <p class="detail-desc" id="product-desc">
+          Sản phẩm SmartHome tích hợp công nghệ AI vượt trội, thiết kế sang trọng đẳng cấp
+          phù hợp với không gian sống hiện đại. Tối ưu điện năng, kết nối thông minh qua app
+          và bảo hành chính hãng lên tới 24 tháng.
         </p>
 
-        <div class="quantity-section">
-          <span class="qty-label">Số lượng:</span>
-          <div class="qty-wrapper">
-            <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
-            <input type="number" id="quantity" class="qty-input" value="1" min="1" readonly />
-            <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+        <div class="detail-features">
+          <div class="detail-feature-item">
+            <span class="detail-feature-icon"><i class="fa-solid fa-wifi"></i></span>
+            <span>Kết nối và điều khiển từ xa qua ứng dụng SmartHome</span>
+          </div>
+          <div class="detail-feature-item">
+            <span class="detail-feature-icon"><i class="fa-solid fa-bolt"></i></span>
+            <span>Công nghệ tiết kiệm điện thế hệ mới, giảm 40% năng lượng</span>
+          </div>
+          <div class="detail-feature-item">
+            <span class="detail-feature-icon"><i class="fa-solid fa-shield-halved"></i></span>
+            <span>Bảo hành chính hãng 24 tháng, hỗ trợ kỹ thuật 24/7</span>
           </div>
         </div>
 
+        <hr class="detail-divider" />
+
+        <!-- QUANTITY -->
+        <div class="detail-qty-row">
+          <span class="detail-qty-label">Số lượng:</span>
+          <div class="detail-qty-control">
+            <button class="detail-qty-btn" id="qty-decrease" type="button" aria-label="Giảm">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="number" id="quantity" class="detail-qty-input" value="1" min="1" readonly />
+            <button class="detail-qty-btn" id="qty-increase" type="button" aria-label="Tăng">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          <span class="detail-stock"><i class="fa-solid fa-circle-check"></i> Còn hàng</span>
+        </div>
+
+        <!-- ACTIONS -->
         <div class="detail-actions">
-          <button class="btn-add-cart">
-            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+          <button class="btn-cart" id="btn-add-cart" type="button">
+            <i class="fa-solid fa-bag-shopping"></i> Thêm vào giỏ
           </button>
-          <button class="btn-buy-now">Mua ngay</button>
+          <button class="btn-buy" id="btn-buy-now" type="button">
+            Mua ngay <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- TRUST -->
+        <div class="detail-trust">
+          <span class="trust-item"><i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển</span>
+          <span class="trust-item"><i class="fa-solid fa-rotate-left"></i> Đổi trả 30 ngày</span>
+          <span class="trust-item"><i class="fa-solid fa-headset"></i> Hỗ trợ 24/7</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SPECS -->
+    <div class="detail-specs-section">
+      <h2>Thông số kỹ thuật</h2>
+      <div class="detail-specs-grid">
+        <div class="spec-row">
+          <span class="spec-label">Thương hiệu</span>
+          <span class="spec-value">SmartHome</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Bảo hành</span>
+          <span class="spec-value">24 tháng chính hãng</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Kết nối</span>
+          <span class="spec-value">Wi-Fi 2.4GHz / 5GHz</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Điều khiển</span>
+          <span class="spec-value">App iOS &amp; Android</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Tiêu chuẩn</span>
+          <span class="spec-value">CE / FCC / RoHS</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Nguồn điện</span>
+          <span class="spec-value">AC 220V - 240V / 50Hz</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Màu sắc</span>
+          <span class="spec-value">Trắng / Đen</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Xuất xứ</span>
+          <span class="spec-value">SmartHome Precision Tech</span>
         </div>
       </div>
-
     </div>
   </main>
 
-  <script >
-    // 1. Hàm tăng giảm số lượng nhanh
-    function updateQuantity(amount) {
-      const qtyInput = document.getElementById('quantity');
-      let currentQty = parseInt(qtyInput.value) || 1;
-      currentQty += amount;
-      if (currentQty >= 1) {
-        qtyInput.value = currentQty;
-      }
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <p>© 2026 SmartHome Precision Tech. All rights reserved. ·
+      <a href="#">Privacy Policy</a> ·
+      <a href="#">Terms of Service</a> ·
+      <a href="index.html#contact">Contact Us</a>
+    </p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="detail-toast" id="detailToast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="detailToastMsg">Đã thêm vào giỏ hàng!</span>
+  </div>
+
+  <script>
+    // ── Sticky header ──────────────────────────────
+    const header = document.getElementById('detailHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Toast helper ───────────────────────────────
+    function showToast(msg) {
+      const toast = document.getElementById('detailToast');
+      document.getElementById('detailToastMsg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 2400);
     }
 
-    // 2. Tự động lấy thông tin từ URL được gửi tự động qua main.js
-    window.addEventListener('DOMContentLoaded', () => {
-      // Đọc thanh địa chỉ URL
-      const params = new URLSearchParams(window.location.search);
-      
-      // Lấy chính xác các tham số mà main.js đã gửi sang
-      const title = params.get('title');
-      const price = params.get('price');
-      const img = params.get('img');
-      const desc = params.get('desc');
+    // ── Quantity control ───────────────────────────
+    document.getElementById('qty-decrease').addEventListener('click', () => {
+      const inp = document.getElementById('quantity');
+      if (parseInt(inp.value) > 1) inp.value = parseInt(inp.value) - 1;
+    });
+    document.getElementById('qty-increase').addEventListener('click', () => {
+      const inp = document.getElementById('quantity');
+      inp.value = parseInt(inp.value) + 1;
+    });
 
-      // Đổ dữ liệu ra giao diện trang chi tiết sản phẩm
-      if (title) document.getElementById('product-title').innerText = title;
-      if (price) document.getElementById('product-price').innerText = price;
-      if (img) document.getElementById('product-img').src = img;
-      
-      if (desc && desc.trim() !== "") {
-        document.getElementById('product-desc').innerText = desc;
+    // ── Thumbnail switcher ─────────────────────────
+    document.querySelectorAll('.detail-thumb[id^="thumb-"]').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const thumbImg = thumb.querySelector('img');
+        if (!thumbImg) return;
+        document.getElementById('product-img').src = thumbImg.src;
+        document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+
+    // ── Load product data from URL params ──────────
+    window.addEventListener('DOMContentLoaded', () => {
+      const p = new URLSearchParams(window.location.search);
+      const title = p.get('title');
+      const price = p.get('price');
+      const img   = p.get('img');
+      const desc  = p.get('desc');
+
+      if (title) {
+        document.getElementById('product-title').textContent = title;
+        document.getElementById('breadcrumb-title').textContent = title;
+        document.title = `${title} - SmartHome`;
+      }
+      if (price) {
+        document.getElementById('product-price').textContent = price;
+        document.getElementById('product-old-price').textContent = '';
+        document.querySelector('.detail-savings').style.display = 'none';
+      }
+      if (img) {
+        const mainImg = document.getElementById('product-img');
+        mainImg.src = img;
+        const t0Img = document.querySelector('#thumb-0 img');
+        if (t0Img) t0Img.src = img;
+      }
+      if (desc && desc.trim()) {
+        document.getElementById('product-desc').textContent = desc;
       } else if (title) {
-        // Nếu sản phẩm đó ở trang chủ không có mô tả (desc trống), tự động tạo mô tả mẫu theo tên
-        document.getElementById('product-desc').innerText = `Sản phẩm ${title} tích hợp công nghệ SmartHome hiện đại, thiết kế tinh tế Premium nâng tầm không gian sống và tối ưu hóa điện năng thông minh cho gia đình bạn.`;
+        document.getElementById('product-desc').textContent =
+          `${title} tích hợp công nghệ SmartHome hiện đại, thiết kế tinh tế và tối ưu hóa năng lượng thông minh cho gia đình bạn.`;
       }
     });
 
-    // Xử lý nút bấm Menu Mobile ẩn hiện (Đồng bộ với header gốc của bạn)
-    const menuToggle = document.getElementById("menuToggle");
-    const navbar = document.getElementById("navbar");
-    if (menuToggle && navbar) {
-      menuToggle.addEventListener("click", () => {
-        navbar.classList.toggle("show");
-      });
-    }
+    // ── Cart & Buy buttons ────────────────────────
+    document.getElementById('btn-add-cart').addEventListener('click', () => {
+      const title = document.getElementById('product-title').textContent;
+      showToast(`Đã thêm "${title}" vào giỏ hàng!`);
+    });
+    document.getElementById('btn-buy-now').addEventListener('click', () => {
+      showToast('Đang chuyển đến thanh toán...');
+      setTimeout(() => window.location.href = 'login.html', 900);
+    });
+
+    // ── Image error fallback ───────────────────────
+    document.getElementById('product-img').addEventListener('error', function() {
+      this.src = '/public/images/home/space-devices.jpg';
+    });
   </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
-    <title>Chi tiết sản phẩm - SmartHome</title>
-    <link rel="stylesheet" href="style.css?v=1780937136999" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <style>
-        /* CSS riêng dành cho trang chi tiết sản phẩm để không làm ảnh hưởng file style.css cũ */
-        .product-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-
-        .product-images {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .main-img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-
-        .product-info {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .product-title {
-            font-size: 2rem;
-            color: #333;
-            margin: 0;
-        }
-
-        .product-price-detail {
-            font-size: 1.8rem;
-            color: #e44d26;
-            font-weight: bold;
-        }
-
-        .product-desc {
-            line-height: 1.6;
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .quantity-btn {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .quantity-btn:hover {
-            background-color: #ddd;
-        }
-
-        .quantity-input {
-            width: 50px;
-            text-align: center;
-            padding: 8px;
-            font-size: 1.1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .btn-add-cart, .btn-buy-now {
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-add-cart {
-            background-color: #fff;
-            color: #2575fc;
-            border: 2px solid #2575fc;
-        }
-
-        .btn-add-cart:hover {
-            background-color: #2575fc;
-            color: #fff;
-        }
-
-        .btn-buy-now {
-            background-color: #ff4757;
-            color: white;
-        }
-
-        .btn-buy-now:hover {
-            background-color: #e84118;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .product-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header class="category-header">
-        <a href="index.html" class="back-home">
-            <i class="fa-solid fa-arrow-left"></i> Quay về trang chủ
-        </a>
-    </header>
-
-    <main class="product-container">
-        
-        <div class="product-images">
-            <img src="./image/sofa-da.jpg" alt="Tên sản phẩm" class="main-img" id="detail-img">
-        </div>
-
-        <div class="product-info">
-            <h1 class="product-title" id="detail-title">Tủ lạnh Side By Side</h1>
-            <div class="product-price-detail" id="detail-price">8.900.000đ</div>
-            
-            <p class="product-desc">
-                Sản phẩm thông minh thế hệ mới tích hợp công nghệ AI vượt trội, giúp tiết kiệm điện năng, thiết kế sang trọng đẳng cấp phù hợp với không gian SmartHome của bạn. Bảo hành chính hãng lên tới 24 tháng.
-            </p>
-
-            <div class="quantity-selector">
-                <label for="quantity">Số lượng:</label>
-                <button class="quantity-btn" onclick="changeQty(-1)">-</button>
-                <input type="number" id="quantity" class="quantity-input" value="1" min="1">
-                <button class="quantity-btn" onclick="changeQty(1)">+</button>
-            </div>
-
-            <div class="action-buttons">
-                <button class="btn-add-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
-                </button>
-                <button class="btn-buy-now">Mua ngay</button>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        // 1. Hàm tăng giảm số lượng nhanh (đã có từ trước)
-        function changeQty(amt) {
-            var qtyInput = document.getElementById('quantity');
-            var currentVal = parseInt(qtyInput.value) || 1;
-            var newVal = currentVal + amt;
-            if (newVal >= 1) {
-                qtyInput.value = newVal;
-            }
-        }
-
-        // 2. ĐOẠN CODE MỚI: Tự động lấy thông tin từ URL để hiển thị lên trang
-        window.addEventListener('DOMContentLoaded', () => {
-            // Lấy các tham số từ thanh địa chỉ (URL)
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            const productTitle = urlParams.get('title');
-            const productPrice = urlParams.get('price');
-            const productImg = urlParams.get('img');
-
-            // Nếu có dữ liệu truyền sang thì mới thay đổi giao diện
-            if (productTitle) {
-                document.getElementById('detail-title').innerText = productTitle;
-            }
-            if (productPrice) {
-                document.getElementById('detail-price').innerText = productPrice;
-            }
-            if (productImg) {
-                document.getElementById('detail-img').src = productImg;
-            }
-        });
-    </script>
-    
 </body>
 </html>
