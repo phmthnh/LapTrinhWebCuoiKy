@@ -1,4 +1,14 @@
 import './script.js'
+import {
+  getCartStorageKey,
+  getCurrentUser,
+  getOrdersStorageKey,
+  getRecentProductsStorageKey,
+  logoutUser,
+  mergeGuestCartIntoUser,
+  migrateLegacyCart,
+  migrateLegacyOrders
+} from './auth.js';
 
 // ============================
 // STICKY HEADER
@@ -89,32 +99,66 @@ if (homeProductsMenu && homeProductsTrigger && homeMegaMenu) {
 // ============================
 // ACTIVE NAV SECTION
 // ============================
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-item");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".home-nav .nav-item");
 const isHomepage = document.querySelector(".hero") !== null;
 
 if (isHomepage && sections.length > 0 && navLinks.length > 0) {
-  window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 150;
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute("id");
-      }
-    });
+  const navTargets = Array.from(navLinks)
+    .map(link => link.getAttribute("data-nav-target")
+      || link.getAttribute("href")?.split("#")[1])
+    .filter(Boolean);
+  const trackedSections = Array.from(sections)
+    .filter(section => navTargets.includes(section.id));
+  let activeNavFrame = null;
 
+  function setActiveNav(current) {
     navLinks.forEach(link => {
-      link.classList.remove("active");
       const href = link.getAttribute("href");
       const navTarget = link.getAttribute("data-nav-target");
-      if (
-        current &&
-        ((href && href.endsWith(`#${current}`)) || navTarget === current)
-      ) {
-        link.classList.add("active");
-      }
+      const active = Boolean(
+        current
+        && ((href && href.endsWith(`#${current}`)) || navTarget === current)
+      );
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  function updateActiveNavSection() {
+    activeNavFrame = null;
+    const documentBottom = document.documentElement.scrollHeight - window.innerHeight;
+    const atPageBottom = window.scrollY >= documentBottom - 4;
+    const probePosition = window.scrollY + Math.min(window.innerHeight * 0.42, 380);
+    let current = trackedSections[0]?.id || "";
+
+    trackedSections.forEach(section => {
+      if (section.offsetTop <= probePosition) current = section.id;
+    });
+
+    if (atPageBottom && trackedSections.length) {
+      current = trackedSections.at(-1).id;
+    }
+
+    setActiveNav(current);
+  }
+
+  function scheduleActiveNavUpdate() {
+    if (activeNavFrame !== null) return;
+    activeNavFrame = window.requestAnimationFrame(updateActiveNavSection);
+  }
+
+  window.addEventListener("scroll", scheduleActiveNavUpdate, { passive: true });
+  window.addEventListener("resize", scheduleActiveNavUpdate);
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const target = link.getAttribute("data-nav-target")
+        || link.getAttribute("href")?.split("#")[1];
+      if (target) setActiveNav(target);
     });
   });
+  updateActiveNavSection();
 }
 
 // ============================
@@ -123,9 +167,16 @@ if (isHomepage && sections.length > 0 && navLinks.length > 0) {
 const productIndex = new Map();
 let productCatalogPromise = null;
 let cart = [];
+const currentUser = getCurrentUser();
+const cartStorageKey = getCartStorageKey(currentUser);
+const ordersStorageKey = getOrdersStorageKey(currentUser);
+
+migrateLegacyCart();
+if (currentUser) mergeGuestCartIntoUser(currentUser);
+migrateLegacyOrders(currentUser);
 
 try {
-  cart = JSON.parse(localStorage.getItem('smarthome_cart')) || [];
+  cart = JSON.parse(localStorage.getItem(cartStorageKey)) || [];
 } catch {
   cart = [];
 }
@@ -140,6 +191,15 @@ function normalizeSearchText(value) {
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .trim();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 }
 
 function getProductFallbackImage(category = '', name = '') {
@@ -182,6 +242,46 @@ function registerProduct(product) {
   return product;
 }
 
+function getProductDetailUrl(product) {
+  const url = new URL('product-detail.html', window.location.href);
+  const params = {
+    id: product.id,
+    title: product.name,
+    category: product.category,
+    price: product.price,
+    oldPrice: product.oldPrice,
+    img: product.image,
+    desc: product.description
+  };
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) url.searchParams.set(key, value);
+  });
+
+  return url.href;
+}
+
+function goToProductDetail(product) {
+  registerProduct(product);
+  rememberViewedProduct(product);
+  window.location.href = getProductDetailUrl(product);
+}
+
+function rememberViewedProduct(product) {
+  const key = getRecentProductsStorageKey(currentUser);
+  let recentProducts = [];
+  try {
+    recentProducts = JSON.parse(localStorage.getItem(key)) || [];
+  } catch {
+    recentProducts = [];
+  }
+  recentProducts = [
+    { ...product, viewedAt: new Date().toISOString() },
+    ...recentProducts.filter(item => item.id !== product.id)
+  ].slice(0, 12);
+  localStorage.setItem(key, JSON.stringify(recentProducts));
+}
+
 function collectProducts(root = document, baseUrl = window.location.href) {
   return Array.from(root.querySelectorAll('.premium-card'))
     .map(card => registerProduct(productFromCard(card, baseUrl)));
@@ -215,6 +315,7 @@ async function loadProductCatalog() {
 function ensureStorefrontUI() {
   const headerActions = document.querySelector('.home-header-actions');
   const searchControl = document.querySelector('.home-search');
+  const accountControl = headerActions?.querySelector('.home-start-button');
 
   if (searchControl) {
     searchControl.setAttribute('href', 'all-products.html?search=1');
@@ -235,6 +336,44 @@ function ensureStorefrontUI() {
       <span class="cart-badge" aria-label="Số sản phẩm trong giỏ">0</span>
     `;
     headerActions.insertBefore(cartButton, headerActions.querySelector('.home-start-button'));
+  }
+
+  if (accountControl && currentUser) {
+    const firstName = currentUser.name.trim().split(/\s+/).pop();
+    accountControl.href = '#account';
+    accountControl.classList.add('home-account-button');
+    accountControl.setAttribute('aria-expanded', 'false');
+    accountControl.setAttribute('aria-controls', 'homeAccountPopover');
+    accountControl.innerHTML = `<i class="fa-regular fa-user"></i><span>${escapeHtml(firstName)}</span>`;
+
+    if (!document.getElementById('homeAccountPopover')) {
+      headerActions.insertAdjacentHTML('beforeend', `
+        <aside class="home-account-popover" id="homeAccountPopover" aria-hidden="true">
+          <div class="home-account-heading">
+            <span class="home-account-avatar">${escapeHtml(currentUser.name
+              .split(/\s+/)
+              .slice(-2)
+              .map(part => part[0])
+              .join('')
+              .toUpperCase())}</span>
+            <div>
+              <strong>${escapeHtml(currentUser.name)}</strong>
+              <small>${escapeHtml(currentUser.email)}</small>
+            </div>
+          </div>
+          <div class="home-account-stats">
+            <div><strong data-account-cart-count>0</strong><span>Trong giỏ</span></div>
+            <div><strong data-account-order-count>0</strong><span>Đơn hàng</span></div>
+          </div>
+          <a href="login.html" class="home-account-link">
+            <i class="fa-regular fa-address-card"></i> Quản lý tài khoản
+          </a>
+          <button type="button" class="home-account-logout" data-account-logout>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+          </button>
+        </aside>
+      `);
+    }
   }
 
   if (!document.getElementById('productSearchOverlay')) {
@@ -475,6 +614,10 @@ function closeProductDetail() {
 function enhanceProductCards() {
   document.querySelectorAll('.premium-card').forEach(card => {
     const product = registerProduct(productFromCard(card));
+    card.tabIndex = 0;
+    card.setAttribute('role', 'link');
+    card.setAttribute('aria-label', `Xem chi tiết ${product.name}`);
+    card.dataset.detailUrl = getProductDetailUrl(product);
     const image = card.querySelector('img');
     if (image) {
       image.dataset.fallback = product.fallbackImage;
@@ -558,7 +701,37 @@ function updateCartUI() {
     `).join('');
   }
 
-  localStorage.setItem('smarthome_cart', JSON.stringify(cart));
+  localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+  updateAccountSummary();
+}
+
+function getStoredOrders() {
+  try {
+    return JSON.parse(localStorage.getItem(ordersStorageKey)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function updateAccountSummary() {
+  const cartCount = document.querySelector('[data-account-cart-count]');
+  const orderCount = document.querySelector('[data-account-order-count]');
+  if (cartCount) {
+    cartCount.textContent = cart.reduce(
+      (total, item) => total + (Number(item.quantity) || 1),
+      0
+    );
+  }
+  if (orderCount) orderCount.textContent = String(getStoredOrders().length);
+}
+
+function setAccountPopover(open) {
+  const popover = document.getElementById('homeAccountPopover');
+  const control = document.querySelector('.home-account-button');
+  if (!popover || !control) return;
+  popover.classList.toggle('is-open', open);
+  popover.setAttribute('aria-hidden', String(!open));
+  control.setAttribute('aria-expanded', String(open));
 }
 
 function initializeStorefront() {
@@ -578,6 +751,22 @@ function initializeStorefront() {
     goToProductSearchPage();
   });
   document.getElementById('homeCartButton')?.addEventListener('click', openCartDrawer);
+  document.querySelector('.home-account-button')?.addEventListener('click', event => {
+    event.preventDefault();
+    const popover = document.getElementById('homeAccountPopover');
+    setAccountPopover(!popover?.classList.contains('is-open'));
+  });
+  document.querySelector('[data-account-logout]')?.addEventListener('click', () => {
+    logoutUser();
+    window.location.href = 'index.html';
+  });
+  document.addEventListener('click', event => {
+    const popover = document.getElementById('homeAccountPopover');
+    const control = document.querySelector('.home-account-button');
+    if (popover && control && !popover.contains(event.target) && !control.contains(event.target)) {
+      setAccountPopover(false);
+    }
+  });
   document.querySelector('[data-close-search]')?.addEventListener('click', closeProductSearch);
   document.querySelector('[data-close-cart]')?.addEventListener('click', closeCartDrawer);
   document.querySelector('[data-close-detail]')?.addEventListener('click', closeProductDetail);
@@ -606,7 +795,7 @@ function initializeStorefront() {
 
     if (detailButton) {
       closeProductSearch();
-      showProductDetail(product);
+      goToProductDetail(product);
     } else {
       addProductToCart(product);
     }
@@ -633,7 +822,12 @@ function initializeStorefront() {
       return;
     }
     closeCartDrawer();
-    showCheckoutModal();
+    if (!currentUser) {
+      sessionStorage.setItem('smarthome_auth_return', 'checkout.html');
+      window.location.href = `login.html?return=${encodeURIComponent('checkout.html')}`;
+      return;
+    }
+    window.location.href = 'checkout.html';
   });
 
   document.getElementById('detailAddToCartButton')?.addEventListener('click', event => {
@@ -645,14 +839,33 @@ function initializeStorefront() {
     const detailButton = event.target.closest('.product-detail-btn');
     if (detailButton) {
       const product = productIndex.get(detailButton.dataset.productId);
-      if (product) showProductDetail(product);
+      if (product) goToProductDetail(product);
       return;
     }
 
     const addButton = event.target.closest('.add-to-cart-btn');
-    if (!addButton) return;
-    const card = addButton.closest('.premium-card, .card');
-    if (card) addProductToCart(registerProduct(productFromCard(card)));
+    if (addButton) {
+      const card = addButton.closest('.premium-card, .card');
+      if (card) addProductToCart(registerProduct(productFromCard(card)));
+      return;
+    }
+
+    const card = event.target.closest('.premium-card');
+    if (!card || event.target.closest('button, a, input, select, textarea')) return;
+    goToProductDetail(registerProduct(productFromCard(card)));
+  });
+
+  document.addEventListener('smarthome:add-product', event => {
+    if (!event.detail?.product) return;
+    addProductToCart(registerProduct(event.detail.product));
+    if (event.detail.openCart) openCartDrawer();
+  });
+
+  document.addEventListener('keydown', event => {
+    const card = event.target.closest('.premium-card');
+    if (!card || event.target !== card || !['Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
+    goToProductDetail(registerProduct(productFromCard(card)));
   });
 
   document.addEventListener('keydown', event => {
@@ -763,6 +976,7 @@ const catalogSearchIntentGroups = [
 
 let catalogFilterTimer;
 const catalogCardOrigins = new Map();
+const CATALOG_PAGE_SIZE = 16;
 
 function getCardSearchScore(card, query) {
   if (!query) return 1;
@@ -874,11 +1088,58 @@ function ensureUnifiedCatalogResults() {
   return section;
 }
 
-function filterProducts({ updateUrl = true } = {}) {
+function renderCatalogPagination(totalItems, currentPage) {
+  const pagination = document.querySelector('.catalog-pagination');
+  if (!pagination) return;
+
+  const totalPages = Math.ceil(totalItems / CATALOG_PAGE_SIZE);
+  pagination.hidden = totalPages <= 1;
+
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+
+  const pageButtons = Array.from({ length: totalPages }, (_, index) => {
+    const page = index + 1;
+    return `
+      <button
+        type="button"
+        class="page-btn${page === currentPage ? ' active' : ''}"
+        data-catalog-page="${page}"
+        aria-label="Trang ${page}"
+        ${page === currentPage ? 'aria-current="page"' : ''}
+      >${page}</button>
+    `;
+  }).join('');
+
+  pagination.innerHTML = `
+    <button
+      type="button"
+      class="page-btn page-btn-arrow"
+      data-catalog-page="${currentPage - 1}"
+      aria-label="Trang trước"
+      ${currentPage === 1 ? 'disabled' : ''}
+    ><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+    ${pageButtons}
+    <button
+      type="button"
+      class="page-btn page-btn-arrow"
+      data-catalog-page="${currentPage + 1}"
+      aria-label="Trang sau"
+      ${currentPage === totalPages ? 'disabled' : ''}
+    ><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+  `;
+}
+
+function filterProducts({
+  updateUrl = true,
+  requestedPage = 1,
+  scrollToResults = false
+} = {}) {
   const state = getCatalogFilterState();
   restoreCatalogCardOrigins();
   const allCards = Array.from(catalogCardOrigins.keys());
-  let visibleProductCount = 0;
 
   allCards.forEach((card, index) => {
     if (!card.dataset.originalOrder) card.dataset.originalOrder = String(index);
@@ -899,63 +1160,94 @@ function filterProducts({ updateUrl = true } = {}) {
   };
 
   const useUnifiedResults = isAllProductsPage() && isCatalogFilterActive(state);
+  let matchingCards = [];
 
   if (useUnifiedResults) {
     const unifiedSection = ensureUnifiedCatalogResults();
     const unifiedGrid = unifiedSection?.querySelector('.catalog-unified-grid');
-    const visibleCards = allCards
+    matchingCards = allCards
       .filter(cardMatchesFilters)
       .sort((first, second) => compareCatalogCards(first, second, state));
+    const totalPages = Math.max(1, Math.ceil(matchingCards.length / CATALOG_PAGE_SIZE));
+    const currentPage = Math.min(totalPages, Math.max(1, Number(requestedPage) || 1));
+    const pageStart = (currentPage - 1) * CATALOG_PAGE_SIZE;
+    const pageCards = matchingCards.slice(pageStart, pageStart + CATALOG_PAGE_SIZE);
 
     document.querySelectorAll('.catalog-section:not(.catalog-unified-results)').forEach(section => {
       section.hidden = true;
     });
     allCards.forEach(card => {
-      if (!visibleCards.includes(card)) card.style.display = 'none';
+      card.style.display = 'none';
     });
-    visibleCards.forEach(card => {
+    pageCards.forEach(card => {
       card.style.display = 'flex';
       unifiedGrid?.appendChild(card);
     });
-    if (unifiedSection) unifiedSection.hidden = visibleCards.length === 0;
-    visibleProductCount = visibleCards.length;
+    if (unifiedSection) unifiedSection.hidden = matchingCards.length === 0;
+
+    renderCatalogPagination(matchingCards.length, currentPage);
+    updateCatalogSearchFeedback(matchingCards.length, allCards.length, state, {
+      currentPage,
+      totalPages,
+      pageStart,
+      visibleOnPage: pageCards.length
+    });
+    if (updateUrl) syncCatalogFilterUrl(state, currentPage);
   } else {
     const grids = Array.from(new Set(
       Array.from(catalogCardOrigins.values()).map(({ grid }) => grid)
     ));
 
     grids.forEach(grid => {
-    const cards = Array.from(grid.querySelectorAll('.premium-card'));
-    let visibleInGrid = 0;
-
-    cards.forEach(card => {
-      const show = cardMatchesFilters(card);
-
-      card.style.display = show ? 'flex' : 'none';
-      if (show) {
-        visibleInGrid += 1;
-        visibleProductCount += 1;
-      }
+      const cards = Array.from(grid.querySelectorAll('.premium-card'))
+        .sort((first, second) => compareCatalogCards(first, second, state));
+      cards.forEach(card => grid.appendChild(card));
+      matchingCards.push(...cards.filter(cardMatchesFilters));
     });
 
-    const catalogSection = grid.closest('.catalog-section');
-    if (catalogSection) catalogSection.hidden = visibleInGrid === 0;
+    const totalPages = Math.max(1, Math.ceil(matchingCards.length / CATALOG_PAGE_SIZE));
+    const currentPage = Math.min(totalPages, Math.max(1, Number(requestedPage) || 1));
+    const pageStart = (currentPage - 1) * CATALOG_PAGE_SIZE;
+    const pageCards = matchingCards.slice(pageStart, pageStart + CATALOG_PAGE_SIZE);
+    const pageCardSet = new Set(pageCards);
 
-    cards.sort((first, second) => compareCatalogCards(first, second, state));
+    grids.forEach(grid => {
+      const cards = Array.from(grid.querySelectorAll('.premium-card'));
+      let visibleInGrid = 0;
 
-    cards.forEach(card => grid.appendChild(card));
+      cards.forEach(card => {
+        const show = pageCardSet.has(card);
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visibleInGrid += 1;
+      });
+
+      const catalogSection = grid.closest('.catalog-section');
+      if (catalogSection) catalogSection.hidden = visibleInGrid === 0;
+    });
+
+    renderCatalogPagination(matchingCards.length, currentPage);
+    updateCatalogSearchFeedback(matchingCards.length, allCards.length, state, {
+      currentPage,
+      totalPages,
+      pageStart,
+      visibleOnPage: pageCards.length
+    });
+    if (updateUrl) syncCatalogFilterUrl(state, currentPage);
+  }
+
+  if (scrollToResults) {
+    document.querySelector('.catalog-header')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   }
 
-  updateCatalogSearchFeedback(visibleProductCount, allCards.length, state);
-  if (updateUrl) syncCatalogFilterUrl(state);
-  return visibleProductCount;
+  return matchingCards.length;
 }
 
-function updateCatalogSearchFeedback(resultCount, totalCount, state) {
+function updateCatalogSearchFeedback(resultCount, totalCount, state, pageState) {
   const status = document.getElementById('catalogSearchStatus');
   const clearButton = document.getElementById('catalogSearchClear');
-  const pagination = document.querySelector('.catalog-pagination');
   const catalogMain = document.querySelector('.catalog-main');
   let emptyState = document.getElementById('catalogSearchEmpty');
 
@@ -963,7 +1255,13 @@ function updateCatalogSearchFeedback(resultCount, totalCount, state) {
 
   const active = isCatalogFilterActive(state);
   const querySuffix = state.rawQuery ? ` cho “${state.rawQuery}”` : '';
-  status.textContent = `${resultCount}/${totalCount} sản phẩm phù hợp${querySuffix}`;
+  if (pageState.totalPages > 1 && resultCount > 0) {
+    const firstVisible = pageState.pageStart + 1;
+    const lastVisible = pageState.pageStart + pageState.visibleOnPage;
+    status.textContent = `Đang hiển thị ${firstVisible}-${lastVisible} trong ${resultCount} sản phẩm phù hợp${querySuffix}`;
+  } else {
+    status.textContent = `${resultCount}/${totalCount} sản phẩm phù hợp${querySuffix}`;
+  }
   clearButton.hidden = !active;
   const activeFilterCount = [
     state.maxPrice < 1000,
@@ -976,8 +1274,6 @@ function updateCatalogSearchFeedback(resultCount, totalCount, state) {
     mobileFilterCount.textContent = String(activeFilterCount);
     mobileFilterCount.hidden = activeFilterCount === 0;
   }
-
-  if (pagination) pagination.hidden = active;
 
   renderCatalogFilterChips(state);
 
@@ -1064,7 +1360,7 @@ function renderCatalogFilterChips(state) {
   container.hidden = chips.length === 0;
 }
 
-function syncCatalogFilterUrl(state) {
+function syncCatalogFilterUrl(state, currentPage = 1) {
   const nextUrl = new URL(window.location.href);
   const setOrDelete = (key, value, defaultValue) => {
     if (value !== defaultValue && value !== '') nextUrl.searchParams.set(key, value);
@@ -1076,6 +1372,7 @@ function syncCatalogFilterUrl(state) {
   setOrDelete('tag', state.tag, 'all');
   setOrDelete('category', state.category, 'all');
   setOrDelete('sort', state.sort, 'featured');
+  setOrDelete('page', String(currentPage), '1');
   nextUrl.searchParams.delete('search');
   window.history.replaceState({}, '', nextUrl);
 }
@@ -1207,6 +1504,15 @@ function initializeCatalogControls() {
   });
 
   document.querySelector('.catalog-main')?.addEventListener('click', event => {
+    const pageButton = event.target.closest('[data-catalog-page]');
+    if (pageButton && !pageButton.disabled) {
+      filterProducts({
+        requestedPage: Number(pageButton.dataset.catalogPage),
+        scrollToResults: true
+      });
+      return;
+    }
+
     const chip = event.target.closest('[data-clear-catalog-filter]');
     if (!chip) return;
     const filter = chip.dataset.clearCatalogFilter;
@@ -1228,7 +1534,10 @@ function initializeCatalogControls() {
     filterProducts();
   });
 
-  filterProducts({ updateUrl: false });
+  filterProducts({
+    updateUrl: false,
+    requestedPage: Number(params.get('page')) || 1
+  });
 
   if ((params.has('search') || input?.value) && input) {
     input.scrollIntoView({ block: 'center' });
@@ -1283,119 +1592,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Mega menu hover delay logic removed in favor of CSS transition delays
-
-// Dynamic Checkout Modal Injection
-function ensureCheckoutModal() {
-  if (document.getElementById('checkoutModalOverlay')) return;
-  
-  const modalHtml = `
-    <div id="checkoutModalOverlay" class="checkout-modal-overlay">
-      <div class="checkout-modal-card">
-        <div class="checkout-header">
-          <h3 class="checkout-title">Thông tin đặt hàng</h3>
-          <button class="checkout-close-btn" id="closeCheckoutBtn">&times;</button>
-        </div>
-        <form class="checkout-form" id="checkoutForm">
-          <div class="checkout-form-group">
-            <label for="checkoutName">Họ và tên</label>
-            <input type="text" id="checkoutName" class="checkout-input" placeholder="Nguyễn Văn A" required />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutPhone">Số điện thoại</label>
-            <input type="tel" id="checkoutPhone" class="checkout-input" placeholder="0901234567" required pattern="[0-9]{10}" title="Vui lòng nhập đúng số điện thoại 10 chữ số" />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutAddress">Địa chỉ nhận hàng</label>
-            <input type="text" id="checkoutAddress" class="checkout-input" placeholder="123 Đường ABC, Quận 1, TP. HCM" required />
-          </div>
-          
-          <div class="checkout-summary">
-            <span>Tổng tiền:</span>
-            <span id="checkoutTotalVal">$0</span>
-          </div>
-          
-          <button type="submit" class="checkout-submit-btn">Xác nhận đặt hàng</button>
-        </form>
-      </div>
-    </div>
-  `;
-  
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const overlay = document.getElementById('checkoutModalOverlay');
-  const closeBtn = document.getElementById('closeCheckoutBtn');
-  
-  const hideModal = () => {
-    overlay.classList.remove('is-active');
-  };
-  
-  closeBtn.addEventListener('click', hideModal);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) hideModal();
-  });
-  
-  const form = document.getElementById('checkoutForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('checkoutName').value;
-    const phone = document.getElementById('checkoutPhone').value;
-    const address = document.getElementById('checkoutAddress').value;
-    
-    if (!name || !phone || !address) return;
-
-    const totalMoney = cart.reduce(
-      (sum, item) => sum + getNumericPrice(item.price) * item.quantity,
-      0
-    );
-    let orders = [];
-    try {
-      orders = JSON.parse(localStorage.getItem('smarthome_orders')) || [];
-    } catch {
-      orders = [];
-    }
-    orders.push({
-      id: `SH-${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      customer: { name, phone, address },
-      items: cart.map(item => ({ ...item })),
-      total: totalMoney
-    });
-    localStorage.setItem('smarthome_orders', JSON.stringify(orders));
-    
-    alert(`🎉 Đặt hàng thành công!\n\nCảm ơn bạn, ${name}.\nĐơn hàng sẽ được giao tới: ${address}.\nChúng tôi sẽ liên hệ qua SĐT ${phone} để xác nhận giao hàng.`);
-    
-    // Clear cart
-    cart = [];
-    updateCartUI();
-    hideModal();
-    
-    // Reset form inputs
-    form.reset();
-  });
-}
-
-function showCheckoutModal() {
-  if (cart.length === 0) {
-    showStoreToast('Hãy thêm sản phẩm trước khi đặt hàng');
-    return;
-  }
-  ensureCheckoutModal();
-  
-  const overlay = document.getElementById('checkoutModalOverlay');
-  const totalVal = document.getElementById('checkoutTotalVal');
-  
-  if (overlay && totalVal) {
-    let totalMoney = 0;
-    cart.forEach(item => {
-      const priceNumeric = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
-      totalMoney += priceNumeric * item.quantity;
-    });
-    
-    totalVal.textContent = '$' + totalMoney.toLocaleString('en-US');
-    overlay.classList.add('is-active');
-  }
-}
-
-// Update logic merged to updateCartUI
+// Checkout is handled on checkout.html.
