@@ -1,0 +1,348 @@
+# Instincts generated from https://github.com/phmthnh/LapTrinhWebCuoiKy
+# Generated: 2026-06-09T07:25:01.152Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: LapTrinhWebCuoiKy-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Commit Length
+
+## Action
+
+Keep commit messages concise (~17 characters)
+
+## Evidence
+
+- Average commit message length: 17 chars
+- Based on 4 commits
+
+---
+id: LapTrinhWebCuoiKy-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: LapTrinhWebCuoiKy-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: LapTrinhWebCuoiKy-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: LapTrinhWebCuoiKy-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: LapTrinhWebCuoiKy-workflow-multi-page-html-css-update
+trigger: "when doing multi page html css update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Workflow Multi Page Html Css Update
+
+## Action
+
+Follow the multi-page-html-css-update workflow:
+1. Edit several .html files (e.g., kitchen.html, lighting.html, living-room.html, security.html)
+2. Update shared style.css to reflect new or changed styles
+3. Commit all related files together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: *.html, style.css
+
+---
+id: LapTrinhWebCuoiKy-workflow-site-wide-merge-or-bugfix
+trigger: "when doing site wide merge or bugfix"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/phmthnh/LapTrinhWebCuoiKy
+---
+
+# LapTrinhWebCuoiKy Workflow Site Wide Merge Or Bugfix
+
+## Action
+
+Follow the site-wide-merge-or-bugfix workflow:
+1. Identify conflicting or buggy files across HTML, JS, and CSS
+2. Edit and resolve issues in each file (e.g., index.html, main.js, style.css, etc.)
+3. Commit all changes together to restore site integrity
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: *.html, main.js, style.css
+
+---
+id: laptrinhwebcuoiky-instinct-file-naming
+trigger: "When creating or renaming a file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct File Naming
+
+## Action
+
+Use camelCase for file names
+
+## Evidence
+
+- Pattern in namingConventions.files
+- Examples: living-room.html, kitchen.html
+
+---
+id: laptrinhwebcuoiky-instinct-function-naming
+trigger: "When defining a function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Function Naming
+
+## Action
+
+Use camelCase for function names
+
+## Evidence
+
+- Pattern in namingConventions.functions
+
+---
+id: laptrinhwebcuoiky-instinct-class-naming
+trigger: "When defining a class"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: laptrinhwebcuoiky-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: laptrinhwebcuoiky-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Import Style
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: laptrinhwebcuoiky-instinct-export-style
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: laptrinhwebcuoiky-instinct-test-location
+trigger: "When adding or updating tests"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Test Location
+
+## Action
+
+Place test files in a separate test directory
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation: separate
+
+---
+id: laptrinhwebcuoiky-instinct-commit-format
+trigger: "When writing a commit message"
+confidence: 0.75
+domain: git
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Commit Format
+
+## Action
+
+Write short, freeform commit messages without a strict prefix
+
+## Evidence
+
+- Pattern in commits.type: freeform
+- Examples: 'commit to feature-update', 'Update living-room.html', 'fix merge conflict'
+
+---
+id: laptrinhwebcuoiky-instinct-multipage-html-css-update
+trigger: "When updating the look, layout, or content of several pages at once to ensure consistent styling"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Multipage Html Css Update
+
+## Action
+
+Edit multiple .html files and update style.css, then commit all related files together
+
+## Evidence
+
+- multi-page-html-css-update workflow
+- Example commits editing several .html files and style.css together
+
+---
+id: laptrinhwebcuoiky-instinct-sitewide-merge-bugfix
+trigger: "When resolving a merge conflict or fixing a bug that affects multiple parts of the site"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: phmthnh/LapTrinhWebCuoiKy
+---
+
+# Laptrinhwebcuoiky Instinct Sitewide Merge Bugfix
+
+## Action
+
+Edit and resolve issues in affected HTML, JS, and CSS files, then commit all changes together
+
+## Evidence
+
+- site-wide-merge-or-bugfix workflow
+- Example commits resolving issues in index.html, main.js, style.css together
+
