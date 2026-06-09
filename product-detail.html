@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
+  <title>Chi tiết sản phẩm - SmartHome</title>
+  
+  <link rel="stylesheet" href="/style.css?v=1780937136999" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <style>
+    /* CSS Premium bổ sung riêng cho trang chi tiết sản phẩm */
+    .detail-main {
+      padding-top: 120px; /* Tránh bị che bởi Fixed Header */
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .detail-container {
+      display: flex;
+      gap: 50px;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.05);
+    }
+
+    .detail-left {
+      flex: 1;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .detail-left img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .detail-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .detail-badge {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #0066ff 0%, #00d2ff 100%);
+      color: white;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .detail-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      color: #1a202c;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .detail-price {
+      font-size: 2rem;
+      color: #0066ff;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .detail-desc-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 8px;
+    }
+
+    .detail-desc {
+      color: #64748b;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    /* Bộ chọn số lượng */
+    .quantity-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .qty-label {
+      font-weight: 500;
+      color: #475569;
+    }
+
+    .qty-wrapper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .qty-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .qty-input {
+      width: 50px;
+      height: 40px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid #cbd5e1;
+      border-right: 1px solid #cbd5e1;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+    }
+
+    /* Các nút hành động */
+    .detail-actions {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn-add-cart {
+      flex: 1;
+      background: #ffffff;
+      color: #0066ff;
+      border: 2px solid #0066ff;
+      padding: 15px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-add-cart:hover {
+      background: #0066ff;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.2);
+    }
+
+    .btn-buy-now {
+      flex: 1;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-buy-now:hover {
+      background: #2575fc;
+      box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .detail-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .detail-left {
+        max-width: 100%;
+      }
+      .detail-title {
+        font-size: 2rem;
+      }
+      .detail-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="mainHeader">
+    <div class="logo">
+      <a href="index.html">
+        <span>SmartHome</span>
+      </a>
+    </div>
+
+    <div class="search-container">
+      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
+      <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+     
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+         
+    <div class="header-right">
+      <nav id="navbar">
+        <a href="index.html" class="nav-item">Trang chủ</a>
+        <a href="all-products.html" class="nav-item">Sản phẩm</a>
+        <a href="login.html" class="nav-item">Đăng nhập</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-main">
+    <div class="detail-container">
+      
+      <div class="detail-left">
+        <img id="product-img" src="" alt="Hình ảnh sản phẩm" />
+      </div>
+
+      <div class="detail-right">
+        <div class="detail-badge">PREMIUM PRODUCT</div>
+        <h1 id="product-title" class="detail-title">Tên sản phẩm</h1>
+        <div id="product-price" class="detail-price">$0</div>
+        
+        <div class="detail-desc-title">Mô tả sản phẩm:</div>
+        <p id="product-desc" class="detail-desc">
+          Đang tải dữ liệu mô tả sản phẩm thông minh...
+        </p>
+
+        <div class="quantity-section">
+          <span class="qty-label">Số lượng:</span>
+          <div class="qty-wrapper">
+            <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+            <input type="number" id="quantity" class="qty-input" value="1" min="1" readonly />
+            <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn-add-cart">
+            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+          </button>
+          <button class="btn-buy-now">Mua ngay</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // 1. Hàm tăng giảm số lượng nhanh
+    function updateQuantity(amount) {
+      const qtyInput = document.getElementById('quantity');
+      let currentQty = parseInt(qtyInput.value) || 1;
+      currentQty += amount;
+      if (currentQty >= 1) {
+        qtyInput.value = currentQty;
+      }
+    }
+
+    // 2. Tự động lấy thông tin từ URL được gửi tự động qua main.js
+    window.addEventListener('DOMContentLoaded', () => {
+      // Đọc thanh địa chỉ URL
+      const params = new URLSearchParams(window.location.search);
+      
+      // Lấy chính xác các tham số mà main.js đã gửi sang
+      const title = params.get('title');
+      const price = params.get('price');
+      const img = params.get('img');
+      const desc = params.get('desc');
+
+      // Đổ dữ liệu ra giao diện trang chi tiết sản phẩm
+      if (title) document.getElementById('product-title').innerText = title;
+      if (price) document.getElementById('product-price').innerText = price;
+      if (img) document.getElementById('product-img').src = img;
+      
+      if (desc && desc.trim() !== "") {
+        document.getElementById('product-desc').innerText = desc;
+      } else if (title) {
+        // Nếu sản phẩm đó ở trang chủ không có mô tả (desc trống), tự động tạo mô tả mẫu theo tên
+        document.getElementById('product-desc').innerText = `Sản phẩm ${title} tích hợp công nghệ SmartHome hiện đại, thiết kế tinh tế Premium nâng tầm không gian sống và tối ưu hóa điện năng thông minh cho gia đình bạn.`;
+      }
+    });
+
+    // Xử lý nút bấm Menu Mobile ẩn hiện (Đồng bộ với header gốc của bạn)
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+    if (menuToggle && navbar) {
+      menuToggle.addEventListener("click", () => {
+        navbar.classList.toggle("show");
+      });
+    }
+  </script>
+</body>
+</html>
