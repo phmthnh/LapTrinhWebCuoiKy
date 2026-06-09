@@ -5,44 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
   <title>Phòng khách sang trọng</title>
-  <link rel="stylesheet" href="/style.css?v=20260609-8" />
+  <link rel="stylesheet" href="/style.css?v=20260609-9" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body class="home-page catalog-page">
   <!-- HEADER -->
-    <!-- HEADER -->
   <header id="mainHeader" class="home-header">
     <div class="home-header-inner">
       <a class="home-brand" href="index.html#home" aria-label="SmartHome - Trang chủ">SmartHome</a>
 
-    <div class="search-container">
-      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
-      <button class="search-btn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </div>
-     
-    <button class="menu-toggle" id="menuToggle" >
-      <i class="fa-solid fa-bars" > </i>
-    </button>
-         
-    <div class="header-right">
-      <nav id="navbar">
-        <a href="index.html" class="nav-item">Trang chủ</a>
-        
-        <div class="dropdown">
-          <a href="#" class="nav-item dropbtn">
-            Sản phẩm <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
-          </a>
-
-          <div class="dropdown-content">
-            <a href="all-products.html"><i class="fa-solid fa-border-all"></i> Tất cả sản phẩm</a>
-            <a href="living-room.html"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
-            <a href="kitchen.html"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
-            <a href="security.html"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
-            <a href="lighting.html"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
-          </div>
-        </div>
       <nav id="navbar" class="home-nav" aria-label="Điều hướng chính">
         <a href="index.html#home" class="nav-item">Home</a>
         <div class="home-products-menu" id="homeProductsMenu">
@@ -150,14 +121,13 @@
     <!-- Sidebar -->
     <aside class="catalog-sidebar">
       <div class="sidebar-widget">
-        
-        <h3 class="sidebar-title">Category</h3>
-        <ul class="category-list">
-          <li onclick="window.location.href='all-products.html'">All Products <span>40</span></li>
-          <li onclick="window.location.href='kitchen.html'">Kitchen <span>10</span></li>
-          <li onclick="window.location.href='living-room.html'" class="active">Living Room <span>10</span></li>
-          <li onclick="window.location.href='lighting.html'">Lighting <span>10</span></li>
-          <li onclick="window.location.href='security.html'">Security <span>10</span></li>
+        <h3 class="sidebar-title">Danh mục</h3>
+        <ul class="category-list catalog-category-filter">
+          <li><button type="button" data-category-filter="all" onclick="window.location.href='all-products.html'">Tất cả sản phẩm <span>40</span></button></li>
+          <li><button type="button" data-category-filter="nha bep" onclick="window.location.href='kitchen.html'">Nhà bếp <span>10</span></button></li>
+          <li><button type="button" class="active" data-category-filter="phong khach">Phòng khách <span>10</span></button></li>
+          <li><button type="button" data-category-filter="chieu sang" onclick="window.location.href='lighting.html'">Chiếu sáng <span>10</span></button></li>
+          <li><button type="button" data-category-filter="an ninh" onclick="window.location.href='security.html'">An ninh <span>10</span></button></li>
         </ul>
       </div>
 
@@ -186,7 +156,7 @@
           <button type="button" class="pill" data-product-tag="sale">Giảm giá</button>
         </div>
       </div>
-    
+
       <div class="sidebar-actions">
         <button class="btn-reset">Đặt lại</button>
         <button class="btn-apply">Xem kết quả</button>
@@ -195,6 +165,27 @@
 
     <!-- Main Content -->
     <main class="catalog-main">
+      <section class="catalog-search-panel" aria-labelledby="catalogSearchLabel">
+        <form class="catalog-search-form" id="catalogSearchForm" role="search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="sr-only" id="catalogSearchLabel" for="catalogSearchInput">Tìm kiếm sản phẩm</label>
+          <input
+            id="catalogSearchInput"
+            type="search"
+            autocomplete="off"
+            placeholder="Tìm theo tên, danh mục hoặc tính năng sản phẩm..."
+          />
+          <button type="submit">Tìm kiếm</button>
+        </form>
+        <div class="catalog-search-feedback">
+          <p id="catalogSearchStatus">Phòng khách sang trọng - 10 sản phẩm</p>
+          <button id="catalogSearchClear" type="button" hidden>
+            Xóa bộ lọc
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </section>
+
       <div class="catalog-header">
         <div class="catalog-title-area">
           <span>Catalog</span>
@@ -211,14 +202,13 @@
       </div>
 
       <div class="premium-grid">
-            <div class="loading-overlay"><div class="spinner"></div></div>
-        
+        <div class="loading-overlay"><div class="spinner"></div></div>
+
         <div class="premium-card" data-id="l1">
           <div class="pcard-img-wrapper">
             <div class="pcard-badge badge-premium">PREMIUM</div>
             <img src="./image/sofa-da.jpg" alt="Sofa da cao cấp">
           </div>
-          
           <div class="pcard-body">
             <div class="pcard-cat">Phòng khách</div>
             <div class="pcard-title">Sofa da cao cấp</div>
@@ -227,16 +217,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$362</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l2">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/ban-tra.jpg" alt="Bàn trà thông minh">
           </div>
           <div class="pcard-body">
@@ -247,13 +235,12 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$685</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l3">
           <div class="pcard-img-wrapper">
             <div class="pcard-badge badge-sale">SALE</div>
@@ -273,10 +260,9 @@
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l4">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/ghe-massage.jpg" alt="Ghế massage thư giãn">
           </div>
           <div class="pcard-body">
@@ -287,16 +273,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$438</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l5">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/den-chum.jpg" alt="Đèn chùm pha lê">
           </div>
           <div class="pcard-body">
@@ -307,16 +291,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$638</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l6">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/rem-tu-dong.jpg" alt="Rèm cửa tự động">
           </div>
           <div class="pcard-body">
@@ -327,16 +309,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$167</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l7">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/dieu-hoa.jpg" alt="Điều hòa thông minh">
           </div>
           <div class="pcard-body">
@@ -347,16 +327,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$283</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l8">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/robot-hut-bui.jpg" alt="Robot hút bụi">
           </div>
           <div class="pcard-body">
@@ -367,16 +345,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$488</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l9">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/may-loc-khong-khi.jpg" alt="Máy lọc không khí">
           </div>
           <div class="pcard-body">
@@ -387,16 +363,14 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$899</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
         <div class="premium-card" data-id="l10">
           <div class="pcard-img-wrapper">
-            
             <img src="./image/loa-thong-minh.jpg" alt="Loa thông minh AI">
           </div>
           <div class="pcard-body">
@@ -407,13 +381,12 @@
             <div class="pcard-footer">
               <div class="pcard-price-area">
                 <div class="pcard-price">$978</div>
-                
               </div>
               <button class="pcard-action add-to-cart-btn">Thêm vào giỏ <i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </div>
         </div>
-        
+
       </div>
 
       <div class="catalog-pagination">
@@ -447,6 +420,6 @@
     </div>
   </footer>
 
-  <script type="module" src="./main.js?v=20260609-8"></script>
+  <script type="module" src="./main.js?v=20260609-9"></script>
 </body>
 </html>

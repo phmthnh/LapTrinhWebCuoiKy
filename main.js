@@ -818,43 +818,6 @@ function isCatalogFilterActive(state) {
 }
 
 function getPrice(card) {
-<<<<<<< HEAD
-  const text = card.querySelector('.pcard-price').textContent;
-  return parseInt(text.replace(/[^0-9]/g, '')) || 0;
-}
-
-// ==========================================
-// XỬ LÝ CLICK SẢN PHẨM CHUYỂN SANG PRODUCT DETAIL
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  // Lắng nghe sự kiện click trên toàn bộ môi trường trang web
-  document.addEventListener("click", (e) => {
-    // Tìm xem vị trí click có nằm trong hoặc chính là thẻ .premium-card không
-    const card = e.target.closest(".premium-card");
-    
-    if (card) {
-      // Ngăn chặn các hành vi mặc định nếu có
-      e.preventDefault();
-
-      // Lấy các thông tin từ giao diện của Card sản phẩm đó
-      const title = card.querySelector(".pcard-title")?.textContent.trim() || "";
-      const price = card.querySelector(".pcard-price")?.textContent.trim() || "";
-      const img = card.querySelector(".pcard-img-wrapper img")?.getAttribute("src") || "";
-      const desc = card.querySelector(".pcard-desc")?.textContent.trim() || "";
-
-      // Mã hóa các ký tự đặc biệt (khoảng trắng, dấu tiếng Việt) để truyền lên URL an toàn
-      const urlParams = new URLSearchParams();
-      urlParams.append("title", title);
-      urlParams.append("price", price);
-      urlParams.append("img", img);
-      urlParams.append("desc", desc);
-
-      // Chuyển hướng trình duyệt sang file product-detail.html kèm dữ liệu
-      window.location.href = `product-detail.html?${urlParams.toString()}`;
-    }
-  });
-});
-=======
   const text = card.querySelector('.pcard-price')?.textContent || '';
   return parseInt(text.replace(/[^0-9]/g, ''), 10) || 0;
 }
@@ -1436,4 +1399,3 @@ function showCheckoutModal() {
 }
 
 // Update logic merged to updateCartUI
->>>>>>> main
