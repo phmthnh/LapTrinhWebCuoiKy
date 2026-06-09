@@ -3,389 +3,373 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="icon" type="image/.icon" href="public/favicon.ico.jpg" />
-
-  <title>SmartHome</title>
-
-  <link rel="stylesheet" href="/style.css?v=1780937136963" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <meta
+    name="description"
+    content="SmartHome mang hệ sinh thái thiết bị gia dụng thông minh đến mọi không gian sống."
+  />
+  <link rel="icon" type="image/jpeg" href="/public/favicon.ico.jpg" />
+  <title>SmartHome - Không gian sống thông minh</title>
+  <link rel="stylesheet" href="/style.css?v=20260609-8" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
 </head>
 
-<body>
-  <!-- HEADER -->
-  <header id="mainHeader">
-    <div class="logo">
-      <a href="#home">
-        <span>SmartHome</span>
-      </a>
-    </div>
+<body class="home-page">
+  <header id="mainHeader" class="home-header">
+    <div class="home-header-inner">
+      <a class="home-brand" href="#home" aria-label="SmartHome - Trang chủ">SmartHome</a>
 
-    <div class="search-container">
-      <input type="text" placeholder="Tìm sản phẩm, thiết bị..." />
-      <button class="search-btn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </div>
-     
-    <button class="menu-toggle" id="menuToggle" >
-      <i class="fa-solid fa-bars" > </i>
-    </button>
-         
-    <div class="header-right">
-      <nav id="navbar">
-        <a href="#home" class="nav-item">Trang chủ</a>
-        
-        <div class="dropdown">
-          <a href="#products" class="nav-item dropbtn">
-            Sản phẩm <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
-          </a>
-          <div class="dropdown-content">
-            <a href="all-products.html"><i class="fa-solid fa-border-all"></i> Tất cả sản phẩm</a>
-            <a href="living-room.html"><i class="fa-solid fa-couch"></i> Phòng khách sang trọng </a>
-            <a href="kitchen.html"><i class="fa-solid fa-kitchen-set"></i> Nhà bếp hiện đại</a>
-            <a href="security.html"><i class="fa-solid fa-shield-halved"></i> Hệ thống an ninh</a>
-            <a href="lighting.html"><i class="fa-solid fa-lightbulb"></i> Chiếu sáng thông minh</a>
+      <nav id="navbar" class="home-nav" aria-label="Điều hướng chính">
+        <a href="#home" class="nav-item active">Home</a>
+        <div class="home-products-menu" id="homeProductsMenu">
+          <button
+            class="nav-item home-products-trigger"
+            id="homeProductsTrigger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="homeMegaMenu"
+            data-nav-target="products"
+          >
+            Products
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
+
+          <div class="home-mega-menu" id="homeMegaMenu">
+            <div class="home-shell home-mega-layout">
+              <div class="home-mega-intro">
+                <p class="home-mega-eyebrow">SmartHome Ecosystem</p>
+                <h2>Thiết bị thông minh cho mọi không gian sống</h2>
+                <p>
+                  Khám phá các giải pháp gia dụng, chiếu sáng và an ninh được kết
+                  nối trong một hệ sinh thái tối giản, tiện nghi.
+                </p>
+                <a class="home-mega-all-link" href="all-products.html">
+                  Xem tất cả sản phẩm
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+
+              <div class="home-mega-categories" aria-label="Danh mục sản phẩm">
+                <a class="home-mega-category home-mega-category-wide" href="all-products.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-border-all"></i></span>
+                  <span>
+                    <strong>Tất cả sản phẩm</strong>
+                    <small>Khám phá toàn bộ hệ sinh thái SmartHome</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="kitchen.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-kitchen-set"></i></span>
+                  <span>
+                    <strong>Nhà bếp</strong>
+                    <small>Thiết bị nấu ăn hiện đại</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="living-room.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-couch"></i></span>
+                  <span>
+                    <strong>Phòng khách</strong>
+                    <small>Robot và thiết bị làm sạch</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="lighting.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                  <span>
+                    <strong>Chiếu sáng</strong>
+                    <small>Đèn và công tắc thông minh</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+
+                <a class="home-mega-category" href="security.html">
+                  <span class="home-mega-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                  <span>
+                    <strong>An ninh</strong>
+                    <small>Camera và khóa cửa bảo mật</small>
+                  </span>
+                  <i class="fa-solid fa-arrow-right home-mega-arrow"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="home-mega-meta">
+              <div class="home-shell home-mega-meta-inner">
+                <span><i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển</span>
+                <span><i class="fa-solid fa-rotate-left"></i> Đổi trả trong 30 ngày</span>
+                <span><i class="fa-solid fa-headset"></i> Hỗ trợ kỹ thuật 24/7</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        <a href="#about" class="nav-item">Giới thiệu</a>
-        <a href="#contact" class="nav-item">Liên hệ</a>
+        <a href="#about" class="nav-item">Technology</a>
+        <a href="#contact" class="nav-item">Support</a>
       </nav>
 
-      <a href="/login.html" class="login-btn">Đăng nhập</a>
-      
-      <div class="cart-box">
-        <div class="cart-icon-wrapper">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-badge">0</span>
-        </div>
-
-        <div class="cart-dropdown">
-  <div class="cart-empty-state">
-    <i class="fa-solid fa-basket-shopping empty-icon"></i>
-    <p>Bạn chưa thêm sản phẩm nào</p>
-  </div>
-
-  <div class="cart-items-container" style="display: none;">
-    <div class="cart-items-list">
+      <div class="home-header-actions">
+        <a class="home-search" href="all-products.html" aria-label="Tìm kiếm sản phẩm">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <a class="home-start-button" href="login.html">Get Started</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
-    <hr style="border: none; border-top: 1px solid #eee; margin: 10px 0;" />
-    <div class="cart-total-section" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
-      <span>Tổng tiền:</span>
-      <span class="cart-total-price">0đ</span>
-    </div>
-    <button class="view-cart-btn" style="width: 100%; background: #000; color: #fff; border: none; padding: 10px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-weight: 600;">Xem giỏ hàng</button>
-  </div>
-</div>
-      </div>
-    </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-text">
-      <h1>Thiết bị thông minh</h1>
-
-      <p>
-        Mang công nghệ hiện đại đến không gian sống của bạn.
-      </p>
-
-      <button>Xem sản phẩm</button>
-    </div>
-
-    <div class="hero-image">
-      <img
-        src="./image/logo.jpg" 
-        alt="SmartHome Hero"
-      />
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section class="products" id="products">
-    <h2>Sản phẩm nổi bật</h2>
-
-    <div class="product-slider">
-
-  <button class="slider-btn prev">
-    <i class="fa-solid fa-chevron-left"></i>
-  </button>
-
-      <div class="product-track">
-
-      
-        <div class="premium-card" data-id="1">
-          <div class="pcard-img-wrapper">
-            <div class="pcard-badge badge-premium">PREMIUM</div>
-            <img src="./image/robot-hut-bui.jpg" alt="Robot hút bụi">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Robot hút bụi</div>
-            <div class="pcard-desc">Tự động dọn dẹp thông minh.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$60</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
+  <main>
+    <section class="hero home-hero" id="home">
+      <div class="home-shell home-hero-grid">
+        <div class="home-hero-copy">
+          <p class="home-eyebrow">New Generation AI</p>
+          <h1>Biến ngôi nhà<br />thành không<br />gian thông minh</h1>
+          <p class="home-hero-description">
+            Trải nghiệm sự tiện nghi vượt trội với hệ sinh thái thiết bị gia dụng
+            thông minh thế hệ mới nhất.
+          </p>
+          <div class="home-hero-actions">
+            <a class="home-button home-button-dark" href="#products">Khám phá ngay</a>
+            <a class="home-button home-button-light" href="#about">
+              <i class="fa-regular fa-circle-play"></i>
+              Xem video
+            </a>
           </div>
         </div>
-        
 
-
-        <div class="premium-card" data-id="2">
-          <div class="pcard-img-wrapper">
-            <div class="pcard-badge badge-sale" style="background: #d32f2f;">SALE</div>
-            <img src="./image/sofa-da.jpg" alt="Sofa da cao cấp">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Sofa da cao cấp</div>
-            <div class="pcard-desc">Thiết kế sang trọng cho phòng khách.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$356</div>
-                <div class="pcard-old-price">$406</div>
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+        <div class="home-hero-media">
+          <img
+            src="/images/home/hero-robot.jpg"
+            alt="Robot hút bụi trong không gian phòng khách hiện đại"
+          />
         </div>
-        
-
-
-        <div class="premium-card" data-id="3">
-          <div class="pcard-img-wrapper">
-            
-            <img src="./image/may-loc-khong-khi.jpg" alt="Máy lọc không khí">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Máy lọc không khí</div>
-            <div class="pcard-desc">Lọc bụi mịn và khử mùi hiệu quả.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$124</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="4">
-          <div class="pcard-img-wrapper">
-            <div class="pcard-badge badge-premium">PREMIUM</div>
-            <img src="./image/tu-lanh.jpg" alt="Tủ lạnh Side By Side">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Tủ lạnh Side By Side</div>
-            <div class="pcard-desc">Dung tích lớn, tiết kiệm điện.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$740</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="5">
-          <div class="pcard-img-wrapper">
-            
-            <img src="./image/noi-chien.jpg" alt="Nồi chiên không dầu">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Nồi chiên không dầu</div>
-            <div class="pcard-desc">Giảm dầu mỡ, tốt cho sức khỏe.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$92</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="6">
-          <div class="pcard-img-wrapper">
-            
-            <img src="./image/may-rua-bat.jpg" alt="Máy rửa bát tự động">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Máy rửa bát tự động</div>
-            <div class="pcard-desc">Làm sạch nhanh chóng và tiện lợi.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$480</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="7">
-          <div class="pcard-img-wrapper">
-            <div class="pcard-badge badge-sale" style="background: #d32f2f;">SALE</div>
-            <img src="./image/khoa-van-tay.jpg" alt="Khóa cửa vân tay">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Khóa cửa vân tay</div>
-            <div class="pcard-desc">Bảo mật hiện đại cho ngôi nhà.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$192</div>
-                <div class="pcard-old-price">$242</div>
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="8">
-          <div class="pcard-img-wrapper">
-            
-            <img src="./image/camera360.jpg" alt="Camera giám sát 360">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Camera giám sát 360°</div>
-            <div class="pcard-desc">Quan sát toàn cảnh ngày đêm.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$76</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <div class="premium-card" data-id="9">
-          <div class="pcard-img-wrapper">
-            
-            <img src="./image/led-wifi.jpg" alt="Bóng đèn LED WiFi">
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-cat">SmartHome</div>
-            <div class="pcard-title">Bóng đèn LED WiFi</div>
-            <div class="pcard-desc">Điều khiển từ xa bằng điện thoại.</div>
-            <div class="pcard-divider"></div>
-            <div class="pcard-footer">
-              <div class="pcard-price-area">
-                <div class="pcard-price">$18</div>
-                
-              </div>
-              <button class="pcard-action add-to-cart-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-        
-
-    </div>
-
-  <button class="slider-btn next">
-     <i class="fa-solid fa-chevron-right"></i>
-  </button>
-
-   </div>
-
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-
-    <div class="about-image">
-      <img
-        src="https://placehold.co/500x350?text=About+Image"
-        alt="Về SmartHome"
-      />
-    </div>
-
-    <div class="about-text">
-      <h2>Về SmartHome</h2>
-
-      <p>
-        SmartHome là website giới thiệu các thiết bị gia dụng hiện đại,
-        giúp cuộc sống trở nên tiện nghi và thông minh hơn.
-      </p>
-    </div>
-
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2>Liên hệ</h2>
-
-    <form id="contactForm">
-      <input type="text" placeholder="Họ và tên" required />
-
-      <input type="email" placeholder="Email" required />
-
-      <textarea placeholder="Nội dung"></textarea>
-
-      <button type="submit">Gửi</button>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  
-  <footer class="premium-footer">
-    <div class="footer-top">
-      <div class="footer-logo">SmartHome</div>
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Settings</a>
-        <a href="#">Contact Us</a>
       </div>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-bottom">
-      <div>© 2026 SmartHome Precision Tech. All rights reserved.</div>
-      <div class="footer-icons">
-        <i class="fa-solid fa-globe"></i>
-        <i class="fa-solid fa-share-nodes"></i>
+    </section>
+
+    <section class="home-spaces">
+      <div class="home-shell">
+        <div class="home-section-heading home-section-heading-left">
+          <h2>Không gian sống</h2>
+          <p>Giải pháp tối ưu cho từng khu vực trong ngôi nhà bạn</p>
+        </div>
+
+        <div class="home-space-grid">
+          <a class="home-space-card" href="kitchen.html">
+            <img src="/images/home/space-kitchen.jpg" alt="Không gian nhà bếp" />
+            <span>Nhà bếp</span>
+          </a>
+          <a class="home-space-card" href="living-room.html">
+            <img src="/images/home/space-living.jpg" alt="Không gian phòng khách" />
+            <span>Phòng khách</span>
+          </a>
+          <a class="home-space-card" href="lighting.html">
+            <img src="/images/home/space-bedroom.jpg" alt="Không gian phòng ngủ" />
+            <span>Phòng ngủ</span>
+          </a>
+          <a class="home-space-card" href="all-products.html">
+            <img src="/images/home/space-devices.jpg" alt="Hệ sinh thái thiết bị thông minh" />
+            <span>Thiết bị thông minh</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="products home-products" id="products">
+      <div class="home-shell">
+        <div class="home-section-heading">
+          <h2>Sản phẩm nổi bật</h2>
+          <p>Thiết kế tinh tế kết hợp cùng công nghệ vượt trội</p>
+        </div>
+
+        <div class="home-product-grid">
+          <article class="home-product-card">
+            <img src="/images/home/product-vacuum.jpg" alt="Máy hút bụi không dây" />
+            <div class="home-product-content">
+              <h3>Máy hút bụi</h3>
+              <p>Công suất mạnh mẽ, lọc bụi mịn hiệu quả 99.9%.</p>
+              <a href="living-room.html">Xem thêm</a>
+            </div>
+          </article>
+
+          <article class="home-product-card">
+            <img src="/images/home/product-airfryer.jpg" alt="Nồi chiên không dầu" />
+            <div class="home-product-content">
+              <h3>Nồi chiên không dầu</h3>
+              <p>Nấu ăn lành mạnh, giảm 80% dầu mỡ dư thừa.</p>
+              <a href="kitchen.html">Xem thêm</a>
+            </div>
+          </article>
+
+          <article class="home-product-card">
+            <img src="/images/home/product-airpurifier.jpg" alt="Máy lọc không khí" />
+            <div class="home-product-content">
+              <h3>Máy lọc không khí</h3>
+              <p>Lọc khí 360 độ, diệt khuẩn bằng tia UV hiện đại.</p>
+              <a href="living-room.html">Xem thêm</a>
+            </div>
+          </article>
+
+          <article class="home-product-card">
+            <img src="/images/home/product-mop.jpg" alt="Robot lau nhà thông minh" />
+            <div class="home-product-content">
+              <h3>Robot lau nhà</h3>
+              <p>Lập bản đồ thông minh, tự động giặt giẻ lau.</p>
+              <a href="all-products.html">Xem thêm</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about home-technology" id="about">
+      <div class="home-shell home-technology-grid">
+        <div class="home-technology-media">
+          <img
+            src="/images/home/technology.jpg"
+            alt="Hệ thống AI điều khiển ngôi nhà thông minh"
+          />
+        </div>
+
+        <div class="home-technology-copy">
+          <h2>Công nghệ dẫn đầu</h2>
+
+          <div class="home-feature-list">
+            <article class="home-feature">
+              <span class="home-feature-icon"><i class="fa-solid fa-bolt"></i></span>
+              <div>
+                <h3>Tiết kiệm điện</h3>
+                <p>
+                  Hệ thống quản lý năng lượng thông minh giúp giảm thiểu lãng phí
+                  và tiết kiệm chi phí vận hành hằng tháng.
+                </p>
+              </div>
+            </article>
+
+            <article class="home-feature">
+              <span class="home-feature-icon"><i class="fa-solid fa-head-side-virus"></i></span>
+              <div>
+                <h3>AI thông minh</h3>
+                <p>
+                  Cảm biến AI tự động nhận diện thói quen người dùng và điều chỉnh
+                  thiết bị tối ưu theo nhu cầu thực tế.
+                </p>
+              </div>
+            </article>
+
+            <article class="home-feature">
+              <span class="home-feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+              <div>
+                <h3>Điều khiển bằng app</h3>
+                <p>
+                  Kết nối và kiểm soát mọi thiết bị trong ngôi nhà bạn từ xa chỉ
+                  với một chạm trên điện thoại di động.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-testimonials" id="contact">
+      <div class="home-shell">
+        <div class="home-section-heading home-section-heading-inverse">
+          <h2>Khách hàng nói gì về SmartHome</h2>
+          <p>Những trải nghiệm thực tế từ cộng đồng yêu công nghệ</p>
+        </div>
+
+        <div class="home-testimonial-grid">
+          <article class="home-testimonial-card">
+            <div class="home-stars" aria-label="5 trên 5 sao">★★★★★</div>
+            <blockquote>
+              “Robot hút bụi của SmartHome thực sự thay đổi cuộc sống của gia
+              đình tôi. Nó rất thông minh và sạch sẽ tuyệt đối.”
+            </blockquote>
+            <div class="home-customer">
+              <span class="home-avatar home-avatar-blue">MH</span>
+              <div><strong>Minh Hoàng</strong><small>Hà Nội</small></div>
+            </div>
+          </article>
+
+          <article class="home-testimonial-card">
+            <div class="home-stars" aria-label="5 trên 5 sao">★★★★★</div>
+            <blockquote>
+              “Thiết kế của các sản phẩm cực kỳ tối giản và sang trọng. Rất hợp
+              với phong cách nội thất hiện đại của nhà mình.”
+            </blockquote>
+            <div class="home-customer">
+              <span class="home-avatar home-avatar-rose">KL</span>
+              <div><strong>Khánh Linh</strong><small>TP. Hồ Chí Minh</small></div>
+            </div>
+          </article>
+
+          <article class="home-testimonial-card">
+            <div class="home-stars" aria-label="5 trên 5 sao">★★★★★</div>
+            <blockquote>
+              “Công nghệ AI rất nhạy, tiết kiệm được nhiều thời gian làm việc nhà
+              để mình có thể chơi với con cái.”
+            </blockquote>
+            <div class="home-customer">
+              <span class="home-avatar home-avatar-slate">QA</span>
+              <div><strong>Quốc Anh</strong><small>Đà Nẵng</small></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-footer">
+    <div class="home-shell">
+      <div class="home-footer-grid">
+        <div class="home-footer-intro">
+          <a class="home-footer-brand" href="#home">SmartHome</a>
+          <p>
+            Giải pháp công nghệ toàn diện cho ngôi nhà hiện đại, mang lại sự tiện
+            nghi và bền vững cho mọi gia đình.
+          </p>
+        </div>
+
+        <div class="home-footer-column">
+          <h3>Sản phẩm</h3>
+          <a href="living-room.html">Robot hút bụi</a>
+          <a href="living-room.html">Máy lọc khí</a>
+          <a href="kitchen.html">Đồ gia dụng</a>
+        </div>
+
+        <div class="home-footer-column">
+          <h3>Hỗ trợ</h3>
+          <a href="#contact">Bảo hành</a>
+          <a href="#contact">Hướng dẫn</a>
+          <a href="#contact">Liên hệ</a>
+        </div>
+
+        <div class="home-footer-column">
+          <h3>Mạng xã hội</h3>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="home-footer-bottom">
+        <p>© 2026 SmartHome Precision Tech. All rights reserved.</p>
+        <div class="home-footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+          <a href="#contact">Contact Us</a>
+        </div>
       </div>
     </div>
   </footer>
 
-
-  <script type="module" src="./main.js"></script>
-
+  <script type="module" src="./main.js?v=20260609-8"></script>
 </body>
 </html>
