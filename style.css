@@ -115,7 +115,7 @@ header {
   display: flex;
   align-items: center;
   gap: 35px;
-  margin-left: auto; /* Đẩy toàn bộ khối này dính về sát lề bên phải */
+  margin: 0 auto; /* Đẩy toàn bộ khối này dính về sát lề bên phải */
   flex-shrink: 0;
 }
 
