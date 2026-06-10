@@ -4589,3 +4589,173 @@ body.home-page .home-footer-legal {
     gap: 14px;
   }
 }
+
+/* ==========================================================================
+   MÃ CSS RESPONSIVE CHO ĐIỆN THOẠI & MÁY TÍNH BẢNG (Dưới 900px)
+   ========================================================================== */
+@media screen and (max-width: 900px) {
+  
+  /* --- HEADER & NAVIGATION --- */
+  header {
+    padding: 0 20px;
+    justify-content: space-between; /* Đẩy logo và nút menu ra 2 đầu */
+    height: 70px;
+  }
+
+  .logo {
+    margin-right: 0;
+  }
+
+  .logo a {
+    font-size: 24px;
+  }
+
+  /* Ẩn thanh tìm kiếm mặc định trên mobile để tránh chật chội (hoặc thu nhỏ lại) */
+  .search-container {
+    display: none; 
+  }
+
+  /* Hiện nút Menu Toggle (Ba gạch) */
+  .menu-toggle {
+    display: block;
+    color: #1a202c;
+    font-size: 24px;
+    z-index: 1001;
+    order: 3; /* Ưu tiên nằm ngoài cùng bên phải */
+  }
+
+  .header-right {
+    gap: 15px;
+    margin-left: auto;
+    margin-right: 15px;
+  }
+
+  /* Biến đổi thanh điều hướng thành dạng Sidebar thu gọn */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Giấu menu sang bên phải màn hình */
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 90px 30px 40px;
+    gap: 20px;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  /* Khi class .show được trigger từ JavaScript (main.js) */
+  nav.show {
+    right: 0; /* Đẩy menu trượt ra ngoài */
+  }
+
+  .nav-item {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .nav-item::after {
+    display: none; /* Tắt gạch chân hiệu ứng desktop */
+  }
+
+  /* Xử lý Dropdown và Mega Menu trên Điện thoại */
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content, .home-mega-menu {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 0 0 15px !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    animation: none !important;
+    background: transparent !important;
+  }
+
+  /* Hiển thị dropdown khi hover hoặc khi menu cha được click */
+  .dropdown:hover .dropdown-content,
+  .home-products-menu.is-open .home-mega-menu {
+    max-height: 500px;
+    display: block !important;
+  }
+
+  .dropdown-content a {
+    padding: 10px 0 !important;
+  }
+
+  /* --- HERO SECTION --- */
+  .hero {
+    flex-direction: column; /* Đổi thành một hàng dọc */
+    padding: 100px 20px 60px;
+    text-align: center;
+    gap: 35px;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+  /* --- DANH SÁCH SẢN PHẨM & CÁC KHỐI NỘI DUNG (Slider/Grid) --- */
+  .products, .about, .contact {
+    padding: 60px 20px;
+  }
+
+  .products h2, .about-text h2, .contact h2 {
+    font-size: 30px;
+    margin-bottom: 35px;
+  }
+
+  .product-track {
+    gap: 15px;
+    overflow-x: auto; /* Cho phép vuốt mượt (swipe) bằng tay trên điện thoại */
+    padding-bottom: 15px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product-track .card, .premium-card {
+    min-width: 260px; /* Thu nhỏ thẻ card sản phẩm vừa vặn màn hình dọc */
+  }
+
+  /* Tắt nút mũi tên Slider trên mobile vì đã có thể vuốt bằng tay */
+  .slider-btn {
+    display: none !important;
+  }
+
+  /* --- KHỐI ABOUT TRANG CHỦ --- */
+  .about {
+    flex-direction: column-reverse; /* Đẩy ảnh lên trên hoặc xuống dưới chữ */
+    gap: 30px;
+  }
+
+  /* Giao diện lưới sản phẩm (Dành cho trang danh mục sản phẩm) */
+  .catalog-grid, .product-grid, .home-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 12px !important;
+  }
+}
+
+/* Tối ưu hóa bổ sung cho màn hình điện thoại siêu nhỏ (Dưới 480px) */
+@media screen and (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 30px;
+  }
+  
+  .login-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
